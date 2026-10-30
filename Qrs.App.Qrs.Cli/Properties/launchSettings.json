@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Qrs.App.Qrs.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "init SampleFiles/example1.cmd.yml"
+    }
+  }
+}

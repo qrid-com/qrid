@@ -1,0 +1,26 @@
+﻿@inherits Code.QridComponentBase
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 200px; overflow-y: scroll">
+            <h2>
+                 @Message
+            </h2>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] 
+    IDialogReference MudDialog { get; set; }
+
+    [Parameter]
+    public string Message { get; set; }
+
+
+}

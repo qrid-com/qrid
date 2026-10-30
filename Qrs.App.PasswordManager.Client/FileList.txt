@@ -1,0 +1,8 @@
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\ResourceData.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\Secret.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\ExportedData.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\ExportedResource.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\ExportFile.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\AttachmentHeader.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\AttachmentBody.proto
+Qrs.App.PasswordManager.Client\ProtoFiles\Proto\Attachment.proto

@@ -1,0 +1,21 @@
+﻿@using Qrs.App.PasswordManager.Client.Models;
+@inherits Code.QridComponentBase
+
+<MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+    <MudTextField ReadOnly=@ReadOnly Label="Encrypted Data Folder" @bind-Text="@App.Settings.DataPath" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+</MudPaper>
+<MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+    <MudTextField ReadOnly=@ReadOnly Label="Tunnel Server Domain" @bind-Text="@App.Settings.TunnelServerDomain" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+</MudPaper>
+<MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+    <MudTextField ReadOnly=@ReadOnly Label="Tunnel Server Url" @bind-Text="@App.Settings.TunnelServerUri" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+</MudPaper>
+    
+
+
+@code {
+
+    [Parameter]
+    public bool ReadOnly { get; set; } = false;
+
+}

@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message EccPublicKey
+{
+    // in ECC, pub key is a point Q = (xQ, yQ) which is the point Q = dG.
+    // (d is priv key and G is generative point which is a static param of the Curve)
+
+    bytes x_q = 1;
+    bytes y_q = 2;
+    EccCurve ecc_curve = 3;   // EccCurve
+}

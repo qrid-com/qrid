@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/CanonicalCrypto/SigEcDsa.proto";
+import "Qrid.Common.Proto/ProtoFiles/CanonicalCrypto/SigMlDsa.proto";
+
+message SigHybridEcDsaMlDsa
+    {
+        // PQC - hybrid signature 
+
+        SigEcDsa sig_ec_dsa = 1;
+        SigMlDsa sig_ml_dsa = 2;
+    }

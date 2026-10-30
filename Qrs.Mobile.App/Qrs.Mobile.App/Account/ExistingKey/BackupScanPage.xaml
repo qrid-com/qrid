@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:scanner="clr-namespace:BarcodeScanning;assembly=BarcodeScanning.Native.Maui"
+             x:Class="Qrs.Mobile.App.Account.ExistingKey.BackupScanPage"
+               Title="Backup Image"
+               BackgroundColor="Black">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <AbsoluteLayout.Children>
+
+
+                <scanner:CameraView
+                    x:Name="objScanner"
+                    CameraEnabled="False"
+                    CameraFacing="Back"
+                    CaptureQuality="High"
+                    PoolingInterval="100"
+                    BarcodeSymbologies="QRCode"
+                    VibrationOnDetected="False"
+                    OnDetectionFinished="CameraView_OnDetectionFinished"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    />
+
+                <StackLayout 
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Padding="0" Spacing="0">
+                    <StackLayout VerticalOptions="Start" BackgroundColor="#55000000" HeightRequest="100">
+                        <Label x:Name="lblTitle" Text="Scanning Backup Image..." TextColor="White" FontSize="Subtitle"
+                           Margin="0,20,0,0"
+                           HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+
+                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="0" Spacing="0">
+                        <BoxView WidthRequest="30" BackgroundColor="#55000000"></BoxView>
+                        <BoxView HorizontalOptions="FillAndExpand"></BoxView>
+                        <BoxView WidthRequest="30" BackgroundColor="#55000000"></BoxView>
+                    </StackLayout>
+
+                    <StackLayout VerticalOptions="End" BackgroundColor="#55000000"  HeightRequest="120">
+                        <Button Text="Stop Scanning" Clicked="StopScanning_Clicked"
+                            Margin="30,4"
+                            VerticalOptions="CenterAndExpand"></Button>
+                        <BoxView HeightRequest="15" ></BoxView>
+                    </StackLayout>
+                </StackLayout>
+
+
+                <StackLayout 
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Padding="0" Spacing="0" BackgroundColor="Black"
+                    x:Name="stlBlackScreen"
+                    IsVisible="false">
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <ActivityIndicator Margin="0,60,0,0" VerticalOptions="Center" HorizontalOptions="Center" Color="#80808080" WidthRequest="30" HeightRequest="30" Scale="2" IsRunning="True" ></ActivityIndicator>
+                    </StackLayout>
+                </StackLayout>
+
+            </AbsoluteLayout.Children>
+        </AbsoluteLayout>
+
+
+
+    </ContentPage.Content>
+</q:QrsPageBase>

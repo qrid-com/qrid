@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="500"
+        x:Class="Qrs.App.Vault.Avalonia.Dialogs.EditFileDialog"
+        Title="Edit File"
+        Width="770" Height="500"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+
+	<Grid Margin="10" RowDefinitions="Auto,*,Auto">
+
+		<!-- Toolbar -->
+		<WrapPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+			<StackPanel Orientation="Horizontal" Margin="0,0,15,5" VerticalAlignment="Center">
+				<TextBlock Text="Encoding:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+				<ComboBox x:Name="EncodingComboBox" MinWidth="150"
+						  SelectionChanged="EncodingComboBox_SelectionChanged"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="0,0,15,5" VerticalAlignment="Center">
+				<TextBlock Text="Line endings:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+				<ComboBox x:Name="NewLineComboBox" MinWidth="150"/>
+			</StackPanel>
+			<Button x:Name="SaveButton" Content="Save" Margin="0,0,10,5" Click="Save_Click"/>
+			<Button x:Name="CancelButton" Classes="Secondary" Content="Cancel" Margin="0,0,10,5" Click="Cancel_Click"/>
+		</WrapPanel>
+
+		<!-- Editor -->
+		<TextBox Grid.Row="1"
+				 x:Name="ContentBox"
+				 AcceptsReturn="True"
+				 AcceptsTab="True"
+				 TextWrapping="NoWrap"
+				 FontFamily="Consolas, Menlo, Monospace"
+				 HorizontalAlignment="Stretch"
+				 VerticalAlignment="Stretch"
+				 VerticalContentAlignment="Top"
+				 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+				 ScrollViewer.VerticalScrollBarVisibility="Auto"
+				 TextChanged="ContentBox_TextChanged"/>
+
+		<!-- Bottom bar -->
+		<StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+			<Label x:Name="DirtyLabel" VerticalAlignment="Center"/>
+		</StackPanel>
+
+	</Grid>
+
+</Window>

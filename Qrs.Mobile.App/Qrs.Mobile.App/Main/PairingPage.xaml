@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"   
+             
+             x:Class="Qrs.Mobile.App.Main.PairingPage"
+               Title="Pairing Mode">
+    <q:QrsScrollPage.Body>
+
+        <StackLayout>
+            <controls:TitleView Title="Pairing with Client Application"/>
+
+            <Label x:Name="lblInfo1" Text="Pairing involves sending our Public Key to your Client Application. Once paired, you will no longer see this screen. Wait until Client Application has asked for the Pairing Code, then click Continue Pairing" HeightRequest="100"  Margin="5,0,5,20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            
+            
+            <Button x:Name="btnCancel" Text="Cancel" BackgroundColor="Red" Clicked="Cancel_Clicked"></Button>
+            <Button x:Name="btnContinuePairing" Text="Continue Pairing" BackgroundColor="Green" Clicked="Continue_Clicked"></Button>
+
+
+        </StackLayout>
+
+
+
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

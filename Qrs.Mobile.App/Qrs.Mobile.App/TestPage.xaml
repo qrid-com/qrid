@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+                 xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"  
+                 x:Class="Qrs.Mobile.App.TestPage"
+                 Title="Enter Qr Code" 
+                 IsFooterVisible="True"
+                 >
+
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+            <Entry Placeholder="email" />
+            <Entry Placeholder="password" />
+        </StackLayout>
+        <StackLayout>
+            <Entry Placeholder="PHONE" />
+        </StackLayout>
+    </q:QrsScrollPage.Body>
+    
+    <q:QrsScrollPage.Footer>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" />
+            <Button Text="Login" />
+        </StackLayout>
+    </q:QrsScrollPage.Footer>
+
+
+</q:QrsScrollPage>

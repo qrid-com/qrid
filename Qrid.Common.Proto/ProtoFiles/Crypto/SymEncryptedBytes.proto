@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message SymEncryptedBytes
+{
+    EncryptionAlgo encryption_algo = 1; 
+    bytes bytes = 2;
+}

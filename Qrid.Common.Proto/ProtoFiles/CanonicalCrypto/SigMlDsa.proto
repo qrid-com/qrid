@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+
+message SigMlDsa
+    {
+        // PQC - ML DSA signature 
+        
+        bytes todo1 = 1;
+        bytes todo2 = 2;
+    }

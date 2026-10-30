@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<linker>
+	<!-- Force preserve core interface types inside System.Runtime -->
+	<assembly fullname="System.Runtime">
+		<type fullname="System.Collections.Generic.IEnumerator`1" preserve="all" />
+		<type fullname="System.Collections.Generic.IEnumerable`1" preserve="all" />
+	</assembly>
+
+	<!-- Prevent the trimmer from breaking protobuf-net core components -->
+	<assembly fullname="protobuf-net.Core" preserve="all" />
+</linker>
+

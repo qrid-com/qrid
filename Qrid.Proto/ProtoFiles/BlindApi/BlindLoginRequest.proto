@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.BlindApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/DataTypeEnum.proto";
+
+message BlindLoginRequest
+{
+    string app_name = 1;
+}
+

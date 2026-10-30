@@ -1,0 +1,8 @@
+﻿Title: Amazon AWS Demo
+Key: 
+Environment:
+- Name: AWS_ACCESS_KEY_ID
+- Name: AWS_SECRET_ACCESS_KEY
+ProcessType: (ps|cmd|bash)
+ProcessFile: /bin/bash
+ProcessArguments: -c SampleFiles/aws_cli.sh 

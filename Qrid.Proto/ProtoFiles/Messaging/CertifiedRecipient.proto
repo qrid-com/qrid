@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Messaging";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+
+import "Qrid.Proto/ProtoFiles/Messaging/Enums.proto";
+
+message CertifiedRecipient
+{
+    string certificate_id = 1; 
+    CertifiedRecipientType certificate_type = 2;
+    string sender = 3;
+    SymEncryptedBytes encrypted_recipient = 4;
+    google.protobuf.Timestamp not_before = 5; 
+    google.protobuf.Timestamp not_after = 6;
+    string app_name = 7;
+}

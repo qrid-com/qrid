@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IntegrationTest (localhost)": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "QRS_TEST_DOMAIN": "localhost",
+        "QRS_TEST_TUNNEL_URL": "http://localhost:4999/"
+      }
+    }
+  }
+}

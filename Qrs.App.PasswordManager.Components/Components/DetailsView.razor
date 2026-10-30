@@ -1,0 +1,164 @@
+﻿@using Qrs.App.PasswordManager.Client.Models;
+@inherits Code.QridComponent<MainScreenView>
+<div  style="height:100%; width:100%;">
+
+    
+    <MudPaper Elevation="0"  Style="display: flex; flex-direction: column; height:100%; width:100%; padding-left:15px; padding-right:10px; ">
+    
+        @*<div>Render Time: @DateTime.Now.Ticks</div>*@
+        
+    @if (Vm != null)
+    {
+
+            <!-- buttons - begin -->
+            <MudPaper Elevation="0"  Class="mt-4 mb-6 d-flex flex-row gap-2">
+
+            @if (Vm.IsView)
+                {
+                    <MudButton @onclick=NewClick
+                               Variant="Variant.Outlined"
+                               StartIcon="@Icons.Material.Filled.AddCircleOutline"
+                               Color="Color.Secondary">
+
+                        <MudText>New</MudText>
+                    </MudButton>
+
+                    @if (!Vm.IsNullModel)
+                    {
+                        <MudButton @onclick=EditClick
+                        Variant="Variant.Outlined"
+                        StartIcon="@Icons.Material.Filled.Edit"
+                        Color="Color.Default">
+                            <MudText>Edit</MudText>
+                        </MudButton>
+
+                        <MudButton @onclick=DeleteClick
+                        Variant="Variant.Outlined"
+                               StartIcon="@Icons.Material.Filled.Delete"
+                               Color="Color.Default">
+                            <MudText>Delete</MudText>
+                        </MudButton>
+                    }
+                }
+                else
+                {
+                <MudButton @onclick=SaveClick
+                            Variant="Variant.Outlined"
+                            StartIcon="@Icons.Material.Filled.Save"
+                            Color="Color.Secondary">
+
+                    <MudText>Save</MudText>
+                </MudButton>
+
+                <MudButton @onclick=CancelClick
+                            Variant="Variant.Outlined"
+                            StartIcon="@Icons.Material.Filled.Cancel"
+                            Color="Color.Default">
+
+                    <MudText>Cancel</MudText>
+                </MudButton>
+
+                
+                }
+                
+                <!-- Mode -->
+
+                <MudPaper Elevation="0" Class="flex-grow-1 d-flex justify-end " Style="">
+                    <MudPaper Elevation="0" Style="align-items: center; ">
+                        <MudText Typo="Typo.h5">@Vm.GetModeString()</MudText>
+                    </MudPaper>
+                </MudPaper>
+
+            </MudPaper>
+            <!-- buttons - end -->
+
+
+            <MudPaper Elevation="0" Class="d-flex flex-row gap-2">
+
+                <MudPaper Width="100%" Class="flex-grow-1 align-self-center " Elevation="0">
+                    <MudPaper Class="d-flex flex-column" Elevation="0">
+
+                        <MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1" Elevation="0">
+                            
+                            <MudTextField Class="flex-grow-1 align-self-center " Disabled="@Vm.IsNullModel"
+                                          Label="Website / Resource" @bind-Text="@Vm.ResourceName" ReadOnly=@Vm.IsView T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+
+                            <MudPaper Height="100%" MinWidth="90px" Width="90px" Elevation="0" Class="align-self-center flex-grow-0 flex-1 ">
+                                <MudSelect T="string" @bind-Value="@Vm.ResourceType" Label="Type" Disabled="@Vm.IsNullModel" ReadOnly=@Vm.IsView Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Dense">
+                                    <MudSelectItem T="string" Value="@("web")" />
+                                    <MudSelectItem T="string" Value="@("file")" />
+                                    <MudSelectItem T="string" Value="@("other")" />
+                                </MudSelect>
+                            </MudPaper>
+
+
+                            
+                        </MudPaper>
+
+                        <MudPaper Width="100%" Class="d-flex flex-row align-baseline mb-1" Elevation="0">
+                            <MudTextField Label="Notes" @bind-Text="@Vm.Notes" Disabled="@Vm.IsNullModel" ReadOnly=@Vm.IsView T="string" Variant="Variant.Outlined" Lines="3"></MudTextField>
+
+                        </MudPaper>
+
+
+                        <MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+                            <MudTextField @bind-Text="@Vm.Username" Disabled="@Vm.IsNullModel" ReadOnly=@Vm.IsView AdornmentIcon="@Icons.Material.Filled.Person" Adornment="Adornment.Start" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+                        </MudPaper>
+
+
+                        <SecretView ViewModel="@Vm.SecretVm"/>
+
+                        @if (Vm.IsStoredInFileAvailable)
+                        {
+                            <MudPaper Width="100%" Elevation="0" Class="mt-4">
+                                <MudMenu AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft" Dense="true">
+                                    <ActivatorContent>
+                                        <MudLink Typo="Typo.body2" Underline="Underline.Hover" Color="Color.Default">Stored in: @Vm.StoredInFileName</MudLink>
+                                    </ActivatorContent>
+                                    <ChildContent>
+                                        <MudMenuItem Icon="@Icons.Material.Filled.ContentCopy" OnClick="CopyFilePathClick">Copy file path</MudMenuItem>
+                                        <MudMenuItem Icon="@Icons.Material.Filled.Info" OnClick="ShowFileDetailsClick">Show file details</MudMenuItem>
+                                    </ChildContent>
+                                </MudMenu>
+                            </MudPaper>
+                        }
+                        
+
+                    </MudPaper>
+                </MudPaper>
+
+            </MudPaper>
+
+
+           
+
+        }
+    else
+    {
+        <div>property "Vm" is null, time is @DateTime.Now.ToString() </div>
+    }
+    </MudPaper>
+
+</div>
+
+
+
+@code {
+
+    public DetailsVm Vm => (DetailsVm)ViewModel;
+    
+    public bool IsEditMode => App.Vm.IsNew || App.Vm.IsEdit;
+
+    protected override bool ShouldRender()
+    {
+        if (State?.MainDivider?.IsDrag ?? false)
+            // when dragging is in progress
+            // do NOT want to render, so return false
+            return false;
+        else
+            // no dragging
+            return true;
+    }
+
+
+}

@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertifiedSig.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKeyPair.proto";
+
+message CertifiedKeyPair
+{
+    CryptoKeyPair key_pair = 1; 
+    Certificate certificate = 2;
+}

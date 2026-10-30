@@ -1,0 +1,41 @@
+
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+             xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"              
+             x:Class="Qrs.App.Vault.Avalonia.Controls.HomePanel">
+    <StackPanel Orientation="Vertical">
+
+		<StackPanel Margin="0,20,0,40" Spacing="0">
+			<TextBlock
+              Margin="18,30,18,2"
+			  HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              TextAlignment="Center"
+              FontSize="28">
+			    Encrypt files and folders<LineBreak/>into a VAULT file
+			</TextBlock>
+		</StackPanel>
+		
+        <Button Content="Create New Vault" Click="Button_New_Clicked"></Button>
+		
+		<Label Classes="ButtonInfo">
+            Create a new .vault file
+        </Label>
+<!--
+        <Button Content="Open Existing Vault" Click="Button_Open_Clicked"></Button>
+        <Label Classes="ButtonInfo" >
+            Open existing .vault file
+        </Label>
+-->
+        <Button Content="Extract from Vault" Click="Button_Extract_Clicked"></Button>
+		
+        <Label Classes="ButtonInfo">
+            Extract all files from .vault file into .content folder
+        </Label>
+
+    </StackPanel>
+</q:QrsViewBase>

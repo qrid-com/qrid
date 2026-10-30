@@ -1,0 +1,11 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Reputation";
+
+import "Qrid.Proto/ProtoFiles/Reputation/CocoResponseItem.proto";
+
+message CocoResponse
+{
+    string coco_request_id = 1;
+    repeated CocoResponseItem items = 2;
+}

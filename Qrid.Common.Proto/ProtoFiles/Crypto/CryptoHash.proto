@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message CryptoHash
+{
+    HashAlgo hash_algo = 1;
+    bytes hash_bytes = 2;
+}

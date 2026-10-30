@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Data.SQLite" Version="2.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Qrid.Common.Client\Qrid.Common.Client.csproj" />
+		<ProjectReference Include="..\Qrs.Client\Qrs.Client.csproj" />
+	</ItemGroup>
+	
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qrid.Common.Client\Qrid.Common.Client.csproj" />
+    <ProjectReference Include="..\Qrid.Common.Proto\Qrid.Common.Proto.csproj" />
+    <ProjectReference Include="..\Qrs.Client.Context\Qrs.Client.Context.csproj" />
+    <ProjectReference Include="..\Qrs.Client\Qrs.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Discovery.Client\Qrs.Discovery.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Proto\Qrs.Proto.csproj" />
+    <ProjectReference Include="..\Qrs.Tunnel.Client\Qrs.Tunnel.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Tunnel.Shared\Qrs.Tunnel.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

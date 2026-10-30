@@ -1,0 +1,32 @@
+# Cloud Build config used by the "Deploy to Cloud Run" button on QRID.COM.
+#
+# The Deploy to Cloud Run button (https://cloud.google.com/run/docs/deploying-source-repositories)
+# clones the repo, checks out the requested revision, and runs Cloud Build
+# using this file when it finds a cloudbuild.yaml in the target `dir`. We
+# can't rely on Dockerfile auto-detection because:
+#   - the image is built from Dockerfile.gcr, not a file named "Dockerfile"
+#   - the build context must be the repo root (project references span
+#     multiple sibling folders), not this subdirectory
+#
+# Substitutions:
+#   _SERVICE_NAME   Cloud Run service name (defaults to qrs-tunnel-server)
+#   _REGION         Cloud Run region (defaults to us-central1)
+#   _RUNTIME_IDENTIFIER  .NET RID for the Native AOT publish (defaults to linux-x64)
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --file=Qrs.Tunnel.Server/Dockerfile.gcr
+      - --build-arg=RUNTIME_IDENTIFIER=${_RUNTIME_IDENTIFIER}
+      - --tag=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$SHORT_SHA
+      - --tag=gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
+      - .
+images:
+  - gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$SHORT_SHA
+  - gcr.io/$PROJECT_ID/${_SERVICE_NAME}:latest
+substitutions:
+  _SERVICE_NAME: qrs-tunnel-server
+  _REGION: us-central1
+  _RUNTIME_IDENTIFIER: linux-x64
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls" 
+             
+             x:Class="Qrs.Mobile.App.Controls.CommandDataView"
+             x:Name="this">
+  <ContentView.Content>
+
+
+        <FlexLayout Direction="Column" BindableLayout.ItemsSource="{Binding CommandDataItems, Source={x:Reference this}}" >
+            <BindableLayout.ItemTemplate>
+
+                <DataTemplate>
+                    <StackLayout>
+
+                        <Label 
+                          Text="{Binding Key, StringFormat='{0} :'}" 
+                          Margin="18,2,18,0"
+                            Padding="0,0,0,0"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          VerticalTextAlignment="Center"
+                            TextColor="{StaticResource Primary}"
+                            FontSize="22"
+                          />    
+
+
+                        <Label Text="{Binding Value}" 
+                               HorizontalOptions="FillAndExpand"
+                               HorizontalTextAlignment="Center"
+                               Margin="18,0,18,24"
+                               Padding="0,0,0,0"
+                               FontSize="17"
+                               TextColor="{StaticResource TextLight}"
+                               />
+
+                    </StackLayout>
+                </DataTemplate>
+
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+
+  </ContentView.Content>
+</ContentView>

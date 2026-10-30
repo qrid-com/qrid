@@ -1,0 +1,98 @@
+﻿@inherits Code.QridComponentBase
+@page "/settings"
+
+
+<MudPaper Width="600px" Class="ml-16 pl-16 d-flex flex-column justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudText class=" mt-10" Typo="Typo.h4">Settings</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-row justify-start gap-2">
+        <MudText class="justify-start" Typo="Typo.body1">
+            This form is Read Only! Modify settings directly by editing the Settings File
+        </MudText>
+    </MudPaper>
+
+    <MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-16" Elevation="0">
+        <MudField Label="Settings File" Variant="Variant.Outlined" Margin="Margin.Dense">
+            <MudText>@App.SettingsFilePath</MudText>
+        </MudField>
+    </MudPaper>
+
+    <SettingsView ReadOnly="true" />
+
+
+
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-start gap-2">
+        <MudButton @onclick=CancelClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Secondary">
+
+            <MudText>Cancel</MudText>
+        </MudButton>
+
+        @if (false)
+        {
+            <MudButton @onclick=DataMigrationClick
+                Variant="Variant.Outlined"
+                       StartIcon="@Icons.Material.Filled.Settings"
+                       Color="Color.Secondary">
+                <MudText>Data Migration</MudText>
+            </MudButton>
+        }
+        @if (false)
+        {
+            <MudButton @onclick=ExportClick
+                       Variant="Variant.Outlined"
+                       StartIcon="@Icons.Material.Filled.FileUpload"
+                       Color="Color.Secondary">
+                <MudText>Export</MudText>
+            </MudButton>
+            <MudButton @onclick=ImportClick
+                       Variant="Variant.Outlined"
+                       StartIcon="@Icons.Material.Filled.FileDownload"
+                       Color="Color.Secondary">
+                <MudText>Import</MudText>
+            </MudButton>
+        }
+
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+    public async Task CancelClick()
+    {
+        // this will create AppRootPath and DataPath folders if they do not exist yet
+        Directory.CreateDirectory(App.AppRootPath);
+        Directory.CreateDirectory(App.Settings.DataPath);
+
+        App.Settings.IsConfirmed = true;
+
+        await App.SaveSettings();
+        // continue initialization
+        App.NavigateToInbox();
+    }
+
+
+    public async Task DataMigrationClick()
+    {
+        await App.PerformDataMigration(App.Settings.DataPath);
+        
+        App.NavigateToInbox();
+    }
+
+    public async Task ExportClick()
+    {
+        App.Navigate("/export");
+    }
+
+    public async Task ImportClick()
+    {
+        App.Navigate("/import");
+    }
+
+
+}

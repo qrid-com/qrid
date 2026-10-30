@@ -1,0 +1,36 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.OpApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+import "Qrid.Proto/ProtoFiles/OpApi/Op.proto";
+
+import "Qrid.Proto/ProtoFiles/Envelope1/EncryptedKek.proto";
+import "Qrid.Proto/ProtoFiles/Envelope1/AccessControl.proto";
+import "Qrid.Proto/ProtoFiles/Envelope1/AccessListDelta.proto";
+
+
+message OpRequestItem
+{
+    int32 index = 1; 
+    Op op = 2;
+    bytes identity_data_bytes = 3;
+    
+    bytes old_associated_data_bytes = 4;
+    SymEncryptedBytes old_payload_dek = 5;
+    repeated EncryptedKek old_payload_keks = 6;
+    bool old_payload_dek_request = 7;
+    AccessControl old_access_control = 8;
+
+    AccessListDelta new_access_list_delta = 9;
+    bytes new_associated_data_bytes = 10;
+    int32 new_top_level_key = 11;
+    bool new_payload_dek_request = 12;
+    
+    bool validate_associated_data = 13;
+}
+
+
+

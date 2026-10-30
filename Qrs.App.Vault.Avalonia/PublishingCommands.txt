@@ -1,0 +1,58 @@
+﻿/* === Windows ==================================================================================== */
+/* (use this) AOT - works, smaller file, still needs 3 native DLLs */
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r win-x64 -f net10.0 -c release -p:CreatePackage=false -p:PublishSingleFile=true -p:PublishAot=true
+
+/* WORKS - produces (SINGLE FILE) that runs OK, but slower on a startup b/c it extracts to tmp folder */
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r win-x64 -f net10.0 -c release -p:CreatePackage=false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
+
+/* WORKS - produces (SINGLE FILE + 3 DLLs) that runs OK, but still needs 3 unmanaged DLLs - libHarfBuzzSharp.dll libSkiaSharp.dll av_libglesv2.dll */
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r win-x64 -f net10.0 -c release -p:CreatePackage=false -p:PublishSingleFile=true
+
+
+/* DEBUG */
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r win-x64 -f net10.0 -c debug -p:CreatePackage=false -p:PublishSingleFile=true
+
+/* this one works - produces EXE that runs, but it is NOT a single file, it requires all other DLL files */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -f net10.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win-x64 -p:WindowsPackageType=None -p:WindowsAppSDKSelfContained=true 
+
+
+/* === Linux - Ubuntu ==================================================================================== */
+/* AOT - the binary will not work on a lower LTS OS version, so I am not using AOT for publishing binaries for now */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true -p:PublishAot=true
+
+/* (used this) */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true    # -p:IncludeNativeLibrariesForSelfExtract=true  this makes startup slower on a lower end hardware, so I dont want it
+
+/* ==== MAC ============================================================================================== */
+
+
+https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/?view=net-maui-9.0
+publish unsigned app:
+
+run unsigned app on the Mac:
+https://support.apple.com/en-gb/guide/mac-help/mh40616/mac
+
+
+#### dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r osx-arm64 -f net10.0-osx -c release -p:PublishSingleFile=true -p:UseAppHost=true
+
+# works, has also produced .pkg file in /publish folder:
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r osx-arm64 -f net10.0-osx -c release 
+
+/* when running this from Windows: error Cross-OS native compilation is not supported.*/
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c release --self-contained -r osx-arm64 -f net10.0 -p:PublishAot=true -p:CreatePackage=true -p:PublishSingleFile=true 
+
+/* (used this) - produced large exe and 3 dylib files */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c release --self-contained -r osx-arm64 -f net10.0 -p:CreatePackage=false -p:PublishSingleFile=true
+
+/* (used this on Mac - AoT) - produced large exe and 3 dylib files */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c release --self-contained -r osx-arm64 -f net10.0 -p:CreatePackage=false -p:PublishSingleFile=true -p:PublishAot=true
+
+
+# works - arm64 - need to grab the 157Mb "QrsPasswordManager" file with red icon and drop it into "Applications" folder
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r osx-arm64 -f net10.0 -c release -p:CreatePackage=false -p:PublishSingleFile=true 
+
+# works - x64 the file is much smaller at 33Mb, how is that?
+dotnet publish Qrs.App.Vault.Avalonia.csproj --self-contained -r osx-x64 -f net10.0 -c release -p:CreatePackage=false -p:PublishSingleFile=true 
+
+/* (used this on Mac - AoT) - produced large exe and 3 dylib files */
+dotnet publish Qrs.App.Vault.Avalonia.csproj -c release --self-contained -r osx-x64 -f net10.0 -p:CreatePackage=false -p:PublishSingleFile=true -p:PublishAot=true

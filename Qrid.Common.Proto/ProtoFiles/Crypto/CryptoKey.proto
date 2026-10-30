@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message CryptoKey
+{
+    KeyAlgo key_algo = 1; // should we make it string?
+    KeyType key_type = 2;
+    bytes key_bytes = 3;
+    repeated KeyUsage key_usage = 4;
+}

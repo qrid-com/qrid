@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@inherits Code.QridComponentBase
+
+<MudThemeProvider @ref="@MudThemeProvider" Theme="MyTheme" />
+<MudPopoverProvider/>
+
+<CascadingAuthenticationState @ref=authStateRef>
+
+<Router AppAssembly="@typeof(Qrs.App.PasswordManager.Components.App).Assembly">
+    <Found Context="routeData">
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @{ App.NavigateToLogin(); }
+                </NotAuthorized>
+        </AuthorizeRouteView>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry ...................... there's nothing at this address. Rendering from COMPONENTS</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+</CascadingAuthenticationState>
+
+@code
+{
+    Object authStateRef;
+
+    public MudThemeProvider MudThemeProvider;
+
+    public MudTheme MyTheme = new MudTheme()
+        {
+            //Palette = new Palette()
+            //{
+            //    Primary = Colors.Blue.Default,
+            //    Secondary = Colors.Green.Accent4,
+            //    AppbarBackground = Colors.Red.Default,
+            //},
+            //PaletteDark = new PaletteDark()
+            //{
+            //    Primary = Colors.Blue.Lighten1
+            //},
+
+            LayoutProperties = new LayoutProperties()
+            {
+                DrawerWidthLeft = "160px"
+            }
+        };
+
+
+    protected override void OnInitialized()
+    {
+        App.RegisterAppRoot(this);
+
+        base.OnInitialized(); // do we need this?
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync(); // do we need this?
+
+        
+
+        App.NavigateToInit();
+
+    }
+
+    protected override void OnParametersSet()
+    {
+        App.Count_OnParametersSet++;
+        Console.WriteLine($"APPPPPPPPPPPPPP - OnParameterSet is called       - Count_={App.Count_OnParametersSet}, Count_Async={App.Count_OnParametersSetAsync}");
+
+        
+
+        base.OnParametersSet(); // do we need this?
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        App.Count_OnParametersSetAsync++;
+        Console.WriteLine($"APPPPPP - ASYNC - OnParametersSetAsync is called - Count_={App.Count_OnParametersSet}, Count_Async={App.Count_OnParametersSetAsync}");
+        
+        await base.OnParametersSetAsync(); // do we need this?
+    }
+
+    // MudThemeProvider.Theme.LayoutProperties.DrawerWidthLeft = "160px";
+}

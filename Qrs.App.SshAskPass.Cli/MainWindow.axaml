@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="640"
+        x:Class="Qrs.App.SshAskPass.Cli.MainWindow"
+        Title="QRS SSH AskPass"
+        Width="420" Height="640"
+        WindowStartupLocation="CenterScreen">
+
+    <DockPanel LastChildFill="True" Margin="16">
+
+        <StackPanel DockPanel.Dock="Top" Spacing="4">
+            <TextBlock x:Name="TitleText" FontSize="18" FontWeight="Bold" TextWrapping="Wrap"/>
+            <TextBlock x:Name="SubtitleText" Foreground="Gray" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <TextBlock x:Name="StatusText" DockPanel.Dock="Bottom" Foreground="Gray"
+                   FontSize="11" TextWrapping="Wrap" Margin="0,8,0,0"/>
+
+        <Grid Margin="0,16,0,0">
+
+            <!-- QR code panel (askpass + init: scan with the QRS app) -->
+            <StackPanel x:Name="QrPanel" IsVisible="False" Spacing="10" HorizontalAlignment="Center">
+                <TextBlock Text="Scan this QR code with your QRS mobile app"
+                           HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+                <Border Width="260" Height="260" HorizontalAlignment="Center">
+                    <Image x:Name="QrImage" Width="260" Height="260"/>
+                </Border>
+                <Button x:Name="CancelQrButton" Content="Cancel" HorizontalAlignment="Center"
+                        Click="CancelQrButton_Click"/>
+            </StackPanel>
+
+            <!-- Pairing code panel -->
+            <StackPanel x:Name="PairingPanel" IsVisible="False" Spacing="10" VerticalAlignment="Center">
+                <TextBlock x:Name="PairingPrompt" Text="Enter the Pairing Code from your QRS app:"
+                           TextWrapping="Wrap"/>
+                <TextBox x:Name="PairingInput" Watermark="Pairing Code"/>
+                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+                    <Button x:Name="PairingCancelButton" Content="Cancel" Click="PairingCancelButton_Click"/>
+                    <Button x:Name="PairingOkButton" Content="OK" IsDefault="True" Click="PairingOkButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Init panel -->
+            <StackPanel x:Name="InitPanel" IsVisible="False" Spacing="8" VerticalAlignment="Center">
+                <TextBlock Text="SSH key file:"/>
+                <TextBox x:Name="KeyFileInput" Watermark="/home/user/.ssh/id_rsa"/>
+                <TextBlock Text="Passphrase:"/>
+                <TextBox x:Name="PasswordInput" PasswordChar="•"/>
+                <TextBlock Text="Confirm passphrase:"/>
+                <TextBox x:Name="ConfirmInput" PasswordChar="•"/>
+                <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button x:Name="InitCancelButton" Content="Cancel" Click="InitCancelButton_Click"/>
+                    <Button x:Name="InitSaveButton" Content="Save" IsDefault="True" Click="InitSaveButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Final message panel -->
+            <StackPanel x:Name="MessagePanel" IsVisible="False" Spacing="14" VerticalAlignment="Center">
+                <TextBlock x:Name="MessageText" TextWrapping="Wrap" HorizontalAlignment="Center"
+                           TextAlignment="Center"/>
+                <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Center"
+                        IsDefault="True" Click="CloseButton_Click"/>
+            </StackPanel>
+
+        </Grid>
+    </DockPanel>
+</Window>

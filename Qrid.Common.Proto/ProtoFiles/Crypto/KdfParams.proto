@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message KdfParams
+{
+    KdfType kdf_type = 1;
+    bytes kdf_params = 2;
+}

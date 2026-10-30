@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrs.Proto/ProtoFiles/AssociatedDataItem.proto";
+
+message AssociatedDataPayload
+{
+    string app_name = 1;
+    string dek_id = 2;
+}
+
+
+

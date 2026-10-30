@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoHash.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoSig.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message HashSig
+{
+    bytes crypto_hash_bytes = 1;
+    CryptoSig sig = 2;
+}

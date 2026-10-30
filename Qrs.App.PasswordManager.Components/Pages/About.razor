@@ -1,0 +1,74 @@
+﻿@inherits Code.QridComponentBase
+@page "/about"
+
+
+<MudPaper Width="600px" Class="ml-16 pl-16 d-flex flex-column justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudText class=" mt-10" Typo="Typo.h4">About Qrs Password Manager</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-column justify-start gap-2">
+        
+        <div>
+            Protect your passwords via QR codes. To unlock your password, just scan QR code with QRS mobile app. 
+        </div>
+
+    </MudPaper>
+
+
+
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-start gap-8">
+        
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+    private MudTable<Code.BackupOption> mudTable;
+    private List<Code.BackupOption> BackupOptions { get; set; }
+    private HashSet<Code.BackupOption> selectedItems = new HashSet<Code.BackupOption>();
+
+    public async Task BackupClick()
+    {
+        // BACKUP
+        App.PerformBackupToAllDestinations(BackupOptions);
+
+        // SHOW RESULTS
+        string backupResult;
+        string backupDetails;
+        App.GetBackupResults(BackupOptions, out backupResult, out backupDetails);
+        MarkupString backupDetailsMarkup = new MarkupString(backupDetails);
+
+        string title;
+        if (backupResult == "S")
+            title = "Backup - Success";
+        else 
+            if (backupResult == "PS")
+                title = "Backup - Partial Success";
+            else
+                title = "Backup - Error";
+
+        // todo - pass markupstring
+        await App.ShowMessageBoxAsync(title, backupDetailsMarkup);
+
+        //App.NavigateToInbox();
+    }
+
+    public async Task CancelClick()
+    {
+        App.NavigateToInbox();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BackupOptions = App.GetBackupOptions();
+
+    }
+
+    void OnRowClick(TableRowClickEventArgs<Code.BackupOption> args)
+    {
+        args.Item.IsSelected = !args.Item.IsSelected;
+    }
+
+}

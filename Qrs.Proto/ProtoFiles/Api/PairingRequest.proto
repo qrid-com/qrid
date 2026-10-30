@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto.Api";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+
+message PairingRequest
+{
+    CryptoKey pub_key = 1;
+    string key_id = 2;
+    string pairing_code = 3;
+}
+
+
+

@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Data";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/HmacBytes.proto";
+
+message EncryptedUserData
+{
+        string username = 1;
+        string email = 2;
+        bytes password_hash = 3;
+        HmacBytes password_params = 4;
+        HmacBytes account_sym_params = 5;
+        HmacBytes account_change_params = 6;
+
+}
+

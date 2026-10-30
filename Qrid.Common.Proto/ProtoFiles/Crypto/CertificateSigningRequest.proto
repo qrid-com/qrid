@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/HashSig.proto";
+
+message CertificateSigningRequest
+{
+    bytes certificate_data = 1;
+    HashSig self_signing_sig = 2;
+}

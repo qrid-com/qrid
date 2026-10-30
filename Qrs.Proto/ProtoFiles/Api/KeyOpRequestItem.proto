@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto.Api";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+import "Qrs.Proto/ProtoFiles/Api/KeyOp.proto";
+
+message KeyOpRequestItem
+{
+    int32 index = 1; 
+    KeyOp key_op = 2;
+    bytes identity_data_bytes = 3;
+    
+    bytes old_associated_data_bytes = 4;
+    SymEncryptedBytes old_wrapped_key = 5;
+    bool old_key_request = 6;
+
+    bytes new_dek_id = 7;
+    bytes new_associated_data_bytes = 8;
+    int32 new_top_level_key = 9;
+    bool new_key_request = 10;
+    
+    bool validate_associated_data = 11;
+}
+
+
+

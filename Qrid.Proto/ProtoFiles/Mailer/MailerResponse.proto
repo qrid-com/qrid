@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Mailer";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+
+message MailerResponse
+{
+        int32 error_code = 1;
+        string hint = 2;
+}
+

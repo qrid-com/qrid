@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Data";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/DataTypeEnum.proto";
+
+message UserInfo
+{
+    string username = 1;
+    string domain = 2;
+}
+

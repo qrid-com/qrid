@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFramework>net10.0-android</TargetFramework>
+	<TargetAndroidVersion>36</TargetAndroidVersion>
+	<SupportedOSPlatformVersion>23.0</SupportedOSPlatformVersion>
+	<OutputType>Exe</OutputType>
+	<RootNamespace>Qrs.Mobile.App</RootNamespace>
+	<Nullable>enable</Nullable>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<UseMaui>true</UseMaui>
+	<!-- The VisualDiagnostics overlay caches the platform root ViewGroup and calls RemoveView on it
+		 when the Android root view is swapped (Application.MainPage = ...). With a long-living page
+		 hosting BarcodeScanning's BarcodeView that native view is already disposed at that point,
+		 which crashes with ObjectDisposedException. The overlay is debug tooling only. -->
+	<MauiEnableVisualDiagnosticsOverlay>false</MauiEnableVisualDiagnosticsOverlay>
+  </PropertyGroup>
+	
+
+	<!-- Add this block for Release optimizations -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<!-- Disables Mono and opts into the CoreCLR runtime for release packaging -->
+		<UseMonoRuntime>false</UseMonoRuntime>
+		<!-- AoT was hanging at the blue start screen on the phone, so disabling it for now -->
+		<PublishAot>false</PublishAot>
+		<!-- NOTE THE TRAILING BACKSLASH AT THE END -->
+		<AndroidNdkDirectory>C:\Program Files (x86)\Android\AndroidNDK\android-ndk-r27c\</AndroidNdkDirectory>
+		<!-- Fixes Native AOT multi-architecture conflicts during standard VS builds -->
+		<!--TrimMode>partial</TrimMode-->
+		<SuppressTrimAnalysisWarnings>false</SuppressTrimAnalysisWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="ILLink.Descriptors.xml" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<!-- Explicit fallback registration for your trimmer descriptors file -->
+		<TrimmerRootDescriptor Include="ILLink.Descriptors.xml" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Qrs.Mobile.App\Qrs.Mobile.App.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\mipmap-anydpi-v26\" />
+    <Folder Include="Resources\mipmap-hdpi\" />
+    <Folder Include="Resources\mipmap-mdpi\" />
+    <Folder Include="Resources\mipmap-xhdpi\" />
+    <Folder Include="Resources\mipmap-xxhdpi\" />
+    <Folder Include="Resources\mipmap-xxxhdpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <LinkDescription Include="ILLink.Descriptors.xml" />
+  </ItemGroup>
+</Project>

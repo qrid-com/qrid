@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Enclave";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+
+message ExistingUserEmailRequest
+{
+        string username = 1;
+        string email = 2;
+        AsymEncryptedBytes encrypted_user_data = 3;
+        AsymEncryptedBytes encrypted_password_hash = 4;
+}
+

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qrs.Client.Context\Qrs.Client.Context.csproj" />
+    <ProjectReference Include="..\Qrs.Client\Qrs.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Discovery.Client\Qrs.Discovery.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>

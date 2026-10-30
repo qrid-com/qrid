@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+
+message SigEcDsa
+    {
+        // ECDSA signature S = (r, s) on message M consisting of a pair of integers r and s 
+        
+        bytes r = 1;
+        bytes s = 2;
+    }

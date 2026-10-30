@@ -1,0 +1,63 @@
+
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+             xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"              
+             x:Class="Qrs.App.Vault.Avalonia.Controls.NewVaultPanel" 
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+			   DataContext="{Binding $self}"
+			   >
+	
+
+		<Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*" VerticalAlignment="Stretch">
+
+			<StackPanel  Grid.Row="0" Grid.Column="0">
+				
+				<controls:PanelHeader Title="New Vault - Drop Files" />
+				<TextBlock Margin="0,0,0,5" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" Theme="{StaticResource HeaderInfo}" Text="Drag and Drop files or use buttons to add / remove:"></TextBlock>
+
+			</StackPanel>
+
+
+
+			<DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True" >
+				<Border Classes="ListBoxHead" DockPanel.Dock="Top" Height="50" >
+					<DockPanel LastChildFill="True">
+						<Button DockPanel.Dock="Left" Margin="5" Padding="8" FontSize="12" Background="Transparent" Click="Button_Add_Clicked">+Add Files</Button>
+						<Button DockPanel.Dock="Right" Margin="5" Padding="8" FontSize="12" Background="Transparent" Click="Button_Remove_Clicked">-Remove</Button>
+						<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:DataType="controls:NewVaultPanel" Text="{Binding FileCount}"/>
+					</DockPanel>
+				</Border>
+				<ListBox x:Name="vaultContentList"
+						 
+						 HorizontalAlignment="Stretch"
+						 VerticalAlignment="Stretch"
+						x:DataType="controls:NewVaultPanel"
+						ItemsSource="{Binding FileCollection}"
+						 SelectionMode="Multiple,Toggle"
+						DragDrop.AllowDrop="True"
+						DragDrop.DragOver="FilesListBox_DragOver"
+						DragDrop.Drop="FilesListBox_Drop"
+				/>				
+			</DockPanel>
+			
+
+
+
+			<StackPanel Grid.Row="2" Grid.Column="0">
+				<Button Content="Save into Vault file" Click="Button_Save_Clicked" Margin="0,15,0,0"></Button>
+				<Label Classes="ButtonInfo" >
+					Saves above files into encrypted .vault file
+				</Label>
+				<Border Height="50"/>
+			</StackPanel>
+
+
+
+		</Grid>
+		
+</q:QrsViewBase>

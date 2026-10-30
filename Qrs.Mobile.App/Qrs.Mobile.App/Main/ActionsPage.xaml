@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+                 xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+                 
+                 x:Class="Qrs.Mobile.App.Main.ActionsPage"
+                 Title="Actions"
+                 IsFooterVisible="False"
+                 >
+    <q:QrsScrollPage.Body>
+        
+        
+        <StackLayout>
+
+            <controls:TitleView Title="Actions"/>
+
+            <Button Text="Backup Master Key"  Clicked="Backup_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                (!) Save your Master Key as a password-encrypted Backup Image. If you dont have a Backup, you will lose your encrypted data once you re-install this app, upgrade phone OS, or use Logout button below.
+            </Label>
+                    
+            <Button Text="Logout"  Clicked="Logout_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Unload your Master Key from this device. (!) Please first save a Backup Image of your Master Key to avoid losing your data.
+            </Label>
+
+            <Button Text="Settings"  Clicked="Settings_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                View or modify settings.
+            </Label>
+
+            <ContentView x:Name="vwDebugOnlyControls">
+                <ContentView.Content>
+                    <StackLayout>
+                    <Button Text="Enter Qr Code String"  Clicked="ScanInput_Clicked"></Button>
+                    <Label Style="{StaticResource ButtonInfo}" >
+                        Debug only - manually copy-paste QR code string instead of scanning. Use this for Debugging purposes, when camera is not available.
+                    </Label>
+
+                    <Button Text="Reset Pairing" Clicked="ResetPairing_Clicked"></Button>
+                    <Label Style="{StaticResource ButtonInfo}" >
+                        Debug only - remove all pairings in all Client Applications by generating a new Device Public/Private Key. Use this to test "Pairing" functionality.
+                    </Label>
+
+                        <Button Text="Reset Known Servers" Clicked="ResetKnownServers_Clicked"></Button>
+                        <Label Style="{StaticResource ButtonInfo}" >
+                            Debug only - reset all known tunnel servers. Use this to test "Alert" appearance and functionality - it will show Alert about new tunnel server on a next QR scan.
+                        </Label>
+
+                        <Button Text="Test" Clicked="Test_Clicked"></Button>
+                        <Label Style="{StaticResource ButtonInfo}" >
+                            Debug only - just a Test button to quickly test some code on device
+                        </Label>
+                    </StackLayout>
+                </ContentView.Content>
+            </ContentView>
+
+        </StackLayout>
+
+    
+    </q:QrsScrollPage.Body>
+    
+
+
+</q:QrsScrollPage>

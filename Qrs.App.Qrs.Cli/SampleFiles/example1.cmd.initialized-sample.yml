@@ -1,0 +1,13 @@
+﻿Title: Example1 from SampleFiles
+DekId: 7590947c-ef6f-4d40-8d2e-f687746697cc
+Key: keytype=qrs&wrappedkey=CAIS2gEKjQEKA0RFSxKFAQoYTWFzdGVyS2V5XzIwMjQwMzA2X0FMRVgxEhBQUk9DRVNTIExBVU5DSEVSGAEiJwoKRmlsZSBUaXRsZRIZRXhhbXBsZTEgZnJvbSBTYW1wbGVGaWxlcyoGCLzSn7kGMiQ3NTkwOTQ3Yy1lZjZmLTRkNDAtOGQyZS1mNjg3NzQ2Njk3Y2MSEG%2FGUOBoFDOfgCdS8RMe%2F%2FwYEFI041zW3mJS9Jq5kNB5fE%2BAFy7bDmM8XowRI8xOENTuDthgRis1g4VHzNDkeGr2bOICjPdAOw%3D%3D
+Environment:
+- Name: QRS_USERNAME
+  Value: 
+  EncryptedValue: CAISQBIQfR62wSdb7+VbcAaPVVR4wRgQUiqTVaQZNSItZa/3SdJ/Y0HxNcCES9jx3lCj0CyPHoUW4EvuX/96Tbz9zjs=
+- Name: QRS_PASSWORD
+  Value: 
+  EncryptedValue: CAISUBIQmho2hAnQyuXeKi6Etb1lNRgQUjpoVkIK7lVWHV02pjEMWHl+rWDWGYnKlfYd3/cHUHlpEbITa5SQgxUmjjDqJkLNaX+/Okt23EwWi8hq
+ProcessType: (ps|cmd|bash)
+ProcessFile: cmd
+ProcessArguments: /Q /C color 0a && SampleFiles\example1.cmd

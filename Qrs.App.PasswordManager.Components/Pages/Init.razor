@@ -1,0 +1,68 @@
+﻿@inherits Code.QridComponentBase
+@page "/init"
+@layout InitLayout
+
+<MudPaper Class="d-flex justify-center flex-grow-1 gap-4" Elevation="0">
+    <MudText class="mx-auto ma-4" Typo="Typo.h4">Loading Data...</MudText>
+</MudPaper>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        Context.LogDebug("Init - OnAfterRenderAsync - before App.InitFromConfigAsync");
+
+        // Settings
+
+        if (App.Settings == null)
+        {
+            // 1). Try Loading Settings
+            await App.LoadSettings();
+        }
+
+        if (App.Settings == null)
+        {
+            // 1.1 - create Default Settings and show it to User to Review/Confirm
+            App.LoadDefaultSettings();
+        }
+
+        if (!App.Settings.IsConfirmed)
+        {
+            App.NavigateToConfirmSettings();
+            return;
+        }
+
+        // Persistent State
+
+        await App.LoadPersistentState();
+
+
+        // here Settings should be good
+        
+        var response = await App.Context.InitFromConfigAsync(App.Settings.TunnelServerDomain, App.Settings.TunnelServerUri, App.Settings.ApiKey);
+
+        if (!response.IsSuccess())
+        {
+            await App.ShowErrorAsync(response.Message);
+            return;
+        }
+
+
+        Context.LogDebug("Init - OnAfterRenderAsync - before App.PerformReloadAsync");
+
+
+        await App.PerformReloadAsync(App.Settings.DataPath);
+
+        App.NavigateToInbox();
+
+        
+        Context.LogDebug("Init - OnAfterRenderAsync - after App.PerformReloadAsync");
+    }
+
+}

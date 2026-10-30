@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Enclave";
+
+import "google/protobuf/timestamp.proto";
+
+message EnclaveStatus
+{
+        string enclave_request_id = 1; // GUID as a string - comes from enclave_request.id column - to avoid issues like C# GUID has a "crazy-endian" internal byte layout that differs from the standard network byte order (big-endian) typically assumed for UUIDs in other systems (like Java's java.util.UUID or RFC4122)
+        int32 fast_response = 2; // if > 0 then the enclave is promising to have response ready within "fast_response" seconds, so client can wait then query the response
+        string status = 3; // A (Approved), P (Pending), R (Rejected)
+        string message = 4; // optional message from the enclave, e.g. reason for rejection
+}
+

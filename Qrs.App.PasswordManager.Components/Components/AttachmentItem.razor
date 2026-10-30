@@ -1,0 +1,59 @@
+﻿@inject ISnackbar Snackbar
+@using Qrs.App.PasswordManager.Client.Models;
+@using Qrs.App.PasswordManager.Client.Proto;
+@inherits Code.QridComponentBase
+
+<MudChip T="string" Class="cursor-url"
+         OnClick="DownloadAttachment"
+         Icon="@Icons.Material.Outlined.FilePresent" 
+        Size="Size.Large" 
+        Label="true" 
+        Variant="Variant.Outlined" 
+        Color="Color.Dark" 
+        OnClose="@OnCloseEventCallback">@FileNameAndSize</MudChip>
+
+@code {
+
+    [Parameter]
+    public Attachment Attachment { get; set; }
+
+    [Parameter]
+    public EventCallback<Attachment> OnRemove { get; set; }
+
+    [Parameter]
+    public bool EnableDelete { get; set; } = true;
+
+    public EventCallback OnCloseEventCallback => (EnableDelete ? EventCallback.Factory.Create(this, Remove) : new EventCallback(null, null));
+
+    public string FileNameAndSize => Attachment?.Header != null ? $"{Attachment.Header.FileName} ({Attachment.Header.SizeStr()})" : "error-null-header";
+
+    private async void DownloadAttachment()
+    {
+        byte[] bytes = Attachment?.Body?.Content?.ToByteArray() ?? null;
+
+        if (bytes == null)
+        {
+            // show error
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
+            Snackbar.Add("Attachment content is missing", Severity.Error);
+        }
+
+        var fileStream = new MemoryStream(bytes);
+
+        using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+        await App.JS.InvokeVoidAsync("downloadFileFromStream", Attachment.Header.FileName, streamRef);
+    }
+
+    
+    public async void Remove()
+    {
+        // do we need this check?
+        if (!OnRemove.HasDelegate) return;
+
+        // btw, InvokeAsync does not throw even if OnRemove has no delegate
+        await OnRemove.InvokeAsync(Attachment);
+    }
+
+    
+}

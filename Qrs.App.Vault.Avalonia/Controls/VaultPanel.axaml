@@ -1,0 +1,50 @@
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+             xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"              
+             x:Class="Qrs.App.Vault.Avalonia.Controls.VaultPanel"
+			   DataContext="{Binding $self}">
+	<Grid RowDefinitions="Auto,*" ColumnDefinitions="*" VerticalAlignment="Stretch">
+
+		<StackPanel Grid.Row="0" Grid.Column="0">
+
+			<controls:PanelHeader x:Name="HeaderPanel" Title="Vault Content:"  />
+			
+		</StackPanel>
+
+		<DockPanel x:Name="vaultContentPanel" Grid.Row="1" Grid.Column="0" LastChildFill="True" >
+			<Border Classes="ListBoxHead" DockPanel.Dock="Top" >
+				<DockPanel LastChildFill="True" Height="50" >
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" x:DataType="controls:VaultPanel" Text="{Binding FileCount}"/>
+				</DockPanel>
+			</Border>
+			<StackPanel DockPanel.Dock="Bottom">
+				<Button Content="Extract Vault into Content Folder" Click="Button_Extract_Clicked" Margin="0,15,0,0"></Button>
+				<Label Classes="ButtonInfo" x:Name="extractButtonInfoLabel" >
+					Extract vault files into content folder to view or edit.
+				</Label>
+				<Border Height="50"/>
+			</StackPanel>
+			<ListBox x:Name="vaultContentList"
+         HorizontalAlignment="Stretch"
+         VerticalAlignment="Stretch"
+         x:DataType="controls:VaultPanel"
+         ItemsSource="{Binding FileCollection}"
+         SelectionMode="Multiple"
+         DoubleTapped="vaultContentList_DoubleTapped">
+					<ListBox.ContextMenu>
+						<ContextMenu>
+							<MenuItem Header="Create New File" Click="ContextMenu_CreateNewFile_Click"/>
+							<MenuItem Header="View / Modify" Click="ContextMenu_ViewModify_Click"/>
+							<MenuItem Header="Export" Click="ContextMenu_Export_Click"/>
+						</ContextMenu>
+					</ListBox.ContextMenu>
+				</ListBox>
+		</DockPanel>
+
+	</Grid>
+
+</q:QrsViewBase>

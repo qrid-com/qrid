@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Envelope1";
+
+import "google/protobuf/timestamp.proto";
+
+enum EncryptedKekType
+{
+    ENCRYPTED_KEK_TYPE_UNSPECIFIED = 0;
+    ENCRYPTED_KEK_TYPE_SYM = 1;
+    ENCRYPTED_KEK_TYPE_ASYM = 2;
+}
+
+

@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Messaging";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+
+message Body
+{
+    string content_type = 1;
+    bytes content_bytes = 2;
+}
+
+
+

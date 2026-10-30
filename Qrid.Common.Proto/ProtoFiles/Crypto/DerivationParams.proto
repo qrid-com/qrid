@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/KdfParams.proto";
+
+message DerivationParams
+{
+    bytes salt = 1;
+    KdfParams kdf_params = 2;
+    string descriptor = 3;
+}

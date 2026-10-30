@@ -1,0 +1,7 @@
+﻿Title: SSH key for ec2-your-host.us-west-2.compute.amazonaws.com
+Key: 
+Environment:
+- Name: SSH_PRIVATE_KEY
+ProcessType: (ps|cmd|bash)
+ProcessFile: /bin/bash
+ProcessArguments: -c SampleFiles/ssh_add_key.sh 

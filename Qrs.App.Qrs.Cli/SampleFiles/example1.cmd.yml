@@ -1,0 +1,7 @@
+﻿Title: Example1 from SampleFiles
+Environment:
+- Name: QRS_USERNAME
+- Name: QRS_PASSWORD
+ProcessType: (ps|cmd|bash)
+ProcessFile: cmd
+ProcessArguments: /Q /C color 0a && SampleFiles\example1.cmd

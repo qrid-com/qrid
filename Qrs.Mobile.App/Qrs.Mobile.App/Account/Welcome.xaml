@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"   
+              
+             x:Class="Qrs.Mobile.App.Account.WelcomePage"
+               Title="Welcome to QRS">
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+            <controls:TitleView Title="Welcome to QRS"/>
+
+            <Button Text="Create New Master Key"  Clicked="CreateNewAccount_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Create new random Master Key. A backup copy will be saved as a password-encrypted Backup Image
+            </Label>
+            
+            <Button Text="Load Existing Master Key"  Clicked="UseExistingAccount_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Load existing Master Key from a password-encrypted Backup Image
+            </Label>
+
+            <Button IsVisible="false" Text="Run Test 2"  Clicked="RunTest_Clicked"></Button>
+
+            <controls:HowItWorks />
+
+            <Label Text="{Binding AppVersion}"></Label>
+
+        </StackLayout>
+
+
+
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

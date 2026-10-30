@@ -1,0 +1,73 @@
+# syntax=docker/dockerfile:1
+#
+# Cold-start-optimized image for Qrs.Tunnel.Server, tuned for the fastest
+# possible startup time when hosted on Google Cloud Run or other
+# Knative-compatible serverless platforms.
+#
+# This image is fully compliant with the Cloud Run Container Contract
+# (https://docs.cloud.google.com/run/docs/container-contract): it listens on
+# the port supplied via the $PORT environment variable (defaulting to 4999
+# for local/manual runs) instead of a hard-coded port.
+#
+# Native AOT: Qrs.Tunnel.Server is a Minimal API app (see Program.cs) that uses
+# a source-generated System.Text.Json context (TunnelJsonContext) instead of
+# reflection-based serialization, so it is published with .NET Native AOT
+# (PublishAot=true, set in the .csproj). Native AOT ahead-of-time compiles the
+# whole app to a single self-contained native executable with no JIT and no
+# runtime IL, giving the fastest cold start (no JIT warm-up, minimal startup
+# work). This replaces the previous ReadyToRun approach, which was only needed
+# while the server still used MVC controllers (unsupported under Native AOT).
+
+# Target .NET Runtime Identifier for the Native AOT publish. Override with
+# --build-arg RUNTIME_IDENTIFIER=linux-arm64 when building for arm64 hosts
+# (e.g. `docker build --build-arg RUNTIME_IDENTIFIER=linux-arm64 -f Qrs.Tunnel.Server/Dockerfile.gcr .`).
+# NOTE: Native AOT cross-compilation is not supported, so the build must run on
+# the same architecture as $RUNTIME_IDENTIFIER (use a matching builder / buildx).
+ARG RUNTIME_IDENTIFIER=linux-x64
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:10.0 AS base
+WORKDIR /app
+# The app binds to 4999 by default (see appsettings.json "Urls": "http://+:4999/"),
+# but Cloud Run injects the actual port to listen on via $PORT at container
+# start (not at build time), so the entrypoint below translates $PORT into the
+# --urls argument at runtime. EXPOSE remains for local docs/tooling.
+EXPOSE 4999
+
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+ARG BUILD_CONFIGURATION=Release
+ARG RUNTIME_IDENTIFIER
+# Native AOT compilation shells out to a C toolchain (clang) and needs the
+# object/compression dev libraries to link the final native executable.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends clang zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+# Project references span multiple folders, so the full source tree is needed for restore.
+COPY . .
+WORKDIR /src/Qrs.Tunnel.Server
+RUN dotnet restore "./Qrs.Tunnel.Server.csproj" -r $RUNTIME_IDENTIFIER
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+ARG RUNTIME_IDENTIFIER
+RUN dotnet publish "./Qrs.Tunnel.Server.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -r $RUNTIME_IDENTIFIER \
+    -o /app/publish \
+    -p:PublishAot=true
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+# Run the self-contained native executable directly. Cloud Run Container
+# Contract: Cloud Run injects the port to listen on via the $PORT env var at
+# container *runtime* (not build time), so it must be read here via a shell
+# rather than baked into a Dockerfile ENV (which only expands at build time).
+# appsettings.json hard-codes "Urls": "http://+:4999/", and that value takes
+# precedence over ASPNETCORE_HTTP_PORTS/ASPNETCORE_URLS set via the
+# environment, so --urls is passed explicitly as a command-line argument
+# (highest configuration precedence) to guarantee Cloud Run's port is actually
+# honored. Falls back to 4999 (the app's default) for local/manual
+# `docker run`. $PORT is validated as digits-only before being interpolated
+# into the --urls argument to avoid injecting shell metacharacters.
+ENTRYPOINT ["/bin/sh", "-c", "PORT=${PORT:-4999}; case \"$PORT\" in *[!0-9]*) PORT=4999;; esac; exec /app/Qrs.Tunnel.Server --urls \"http://+:$PORT\""]

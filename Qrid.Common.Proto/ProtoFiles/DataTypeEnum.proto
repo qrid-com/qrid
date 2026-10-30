@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+enum DataType
+{
+    DATA_TYPE_UNSPECIFIED = 0;
+    DATA_TYPE_CERTIFIED_PUBLIC_KEY = 1;
+    DATA_TYPE_NON_CERTIFIED_PUBLIC_KEY = 2;
+    DATA_TYPE_CRYPTO_KEY = 3;
+    DATA_TYPE_CRYPTO_KEY_PAIR = 4;
+    DATA_TYPE_CERTIFIED_KEY_PAIR = 5;
+    DATA_TYPE_CRYPTO_HASH = 6;
+    DATA_TYPE_CRYPTO_HMAC = 7;
+    DATA_TYPE_MESSAGE = 1001;
+    DATA_TYPE_ENC_ENVELOPE = 1002;
+    DATA_TYPE_ENC_HEADER = 1003;
+}

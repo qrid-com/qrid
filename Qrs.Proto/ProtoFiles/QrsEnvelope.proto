@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+
+message QrsEnvelope
+{
+    int32 schema_version = 1;
+    SymEncryptedBytes encrypted_dek = 3;
+    SymEncryptedBytes encrypted_payload = 4;
+    bytes identity_data_bytes = 5;
+    bytes associated_data_bytes = 6;
+}
+
+
+

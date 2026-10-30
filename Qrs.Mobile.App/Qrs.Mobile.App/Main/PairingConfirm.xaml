@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"   
+             
+             x:Class="Qrs.Mobile.App.Main.PairingConfirm"
+               Title="Pairing" 
+                 >
+    <q:QrsScrollPage.Body>
+
+        <StackLayout>
+            <controls:TitleView Title="Pairing Code:"/>
+
+            <Label x:Name="lblPairingCode" Text="..." FontSize="Large" Scale="2" Margin="5,0,5,20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+
+            <Label x:Name="lblCaption" Text="Please enter the above Pairing Code into your Client Application, then press Continue button" FontSize="Medium" Margin="5,20,5,30" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+            
+            <!--ActivityIndicator Margin="0,60,0,60" VerticalOptions="Center" HorizontalOptions="Center" Color="Black" WidthRequest="30" HeightRequest="30" Scale="2" IsRunning="True" ></ActivityIndicator-->
+
+            <Button x:Name="btnCancel" Text="Cancel" BackgroundColor="Red" Clicked="Cancel_Clicked"></Button>
+            <Button x:Name="btnContinuePairing" Text="Continue" BackgroundColor="Green" Clicked="Continue_Clicked"></Button>
+
+        </StackLayout>
+
+
+
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

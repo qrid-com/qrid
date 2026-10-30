@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net10.0</TargetFramework>
+	  <NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>  
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Google.Protobuf" Version="3.31.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\Qrid.Common.Proto\Qrid.Common.Proto.csproj" />
+  </ItemGroup>
+
+</Project>

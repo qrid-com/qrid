@@ -1,0 +1,44 @@
+﻿@inherits Code.QridComponentBase
+@page "/confirmsettings"
+@layout InitLayout
+
+<MudPaper Width="600px" Class="mx-auto d-flex flex-column justify-center flex-grow-1 gap-4" Elevation="0">
+    <MudText class="mx-auto mt-10" Typo="Typo.h4">Confirm Settings</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-row justify-center gap-2">
+        <MudText class="justify-center" Typo="Typo.body1">
+            Starting for the 1st time on this computer. Please confirm the Settings below.
+        </MudText>
+    </MudPaper>
+
+    <SettingsView/>
+
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-center gap-2">
+    <MudButton @onclick=SaveClick
+               Variant="Variant.Outlined"
+               StartIcon="@Icons.Material.Filled.Save"
+               Color="Color.Secondary">
+
+        <MudText>Save and Continue</MudText>
+    </MudButton>
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+    public async Task SaveClick()
+    {
+        // this will create AppRootPath and DataPath folders if they do not exist yet
+        Directory.CreateDirectory(App.AppRootPath);
+        Directory.CreateDirectory(App.Settings.DataPath);
+
+        App.Settings.IsConfirmed = true;
+
+        await App.SaveSettings();
+        // continue initialization
+        App.NavigateToInit();
+    }
+}

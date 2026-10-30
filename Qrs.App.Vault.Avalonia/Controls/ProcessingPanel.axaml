@@ -1,0 +1,24 @@
+
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+               xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d" 
+			   			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+               x:Class="Qrs.App.Vault.Avalonia.Controls.ProcessingPanel">
+
+	<Grid Margin="0,0,0,50">
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+			<controls:PanelHeader 
+				x:Name="titleHeader" 
+				Title="Processing ..." 
+				VerticalAlignment="Center" 
+				HorizontalAlignment="Center"/>
+			<ProgressBar IsIndeterminate="True"   />
+		</StackPanel>
+    </Grid>
+    
+</q:QrsViewBase>

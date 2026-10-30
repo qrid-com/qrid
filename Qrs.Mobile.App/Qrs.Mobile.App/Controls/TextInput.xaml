@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls:TextInputBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls" 
+             x:Class="Qrs.Mobile.App.Controls.TextInput"
+             x:Name="this">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <ContentView>
+                <StackLayout Margin="0">
+                                <Entry x:Name="WindowsTextEdit" Placeholder="{TemplateBinding LabelText}" Text="{TemplateBinding Text}" 
+                                       Keyboard="{TemplateBinding Keyboard}" IsSpellCheckEnabled="false" 
+                                       IsTextPredictionEnabled="false"
+                                       IsReadOnly="{TemplateBinding IsReadOnly}"
+                                       IsPassword="{TemplateBinding IsPassword}"
+                                       ></Entry>
+                                <Label x:Name="WindowsError" Text="{TemplateBinding ErrorText}" IsVisible="{TemplateBinding HasError}" 
+                                       TextColor="Red" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="0,0,0,3" />
+                </StackLayout>
+            </ContentView>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</controls:TextInputBase>

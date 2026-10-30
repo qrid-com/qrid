@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Account.NewKey.BackupImagePage"
+               Title="Backup Image">
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+            <controls:TitleView Title="Save This Image!!!"/>
+
+            <Label Style="{StaticResource ButtonInfo}" Margin="3,0,3,20" >
+                This is a password-encrypted BACKUP of your Master Key which will be required to LOAD your Master Key on another phone or after re-installing this app or upgrading OS. Master Key Name:
+            </Label>
+            
+            <Label Text="KeyName"
+                   x:Name="KeyName"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,25"
+                   FontSize="17"
+                   />
+
+            <ContentView WidthRequest="250" HeightRequest="250">
+                <Image x:Name="BackupQrCodeImage" IsVisible="True"
+                       HeightRequest="250" WidthRequest="250" />
+            </ContentView>
+
+            <BoxView HeightRequest="20" ></BoxView>
+            <Button Text="I have saved this image" Clicked="Continue_Clicked" VerticalOptions="EndAndExpand"></Button>
+            <BoxView HeightRequest="2" ></BoxView>
+        </StackLayout>
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

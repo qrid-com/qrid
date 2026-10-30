@@ -1,0 +1,2 @@
+Qrs.App.Vault.Client\ProtoFiles\Proto\File.proto
+Qrs.App.Vault.Client\ProtoFiles\Proto\Vault.proto

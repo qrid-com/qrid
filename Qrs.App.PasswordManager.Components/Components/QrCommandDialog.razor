@@ -1,0 +1,115 @@
+﻿@inherits Code.QridComponentBase
+@using BlazorZXingJs
+
+<MudDialog>
+    <DialogContent>
+        <MudContainer Style="max-height: 500px; height:500px; max-width:500px; width:500px; overflow-y: scroll">
+            @if (DisplayMode == "qrcode" || string.IsNullOrWhiteSpace(DisplayMode))
+            {
+                
+                <MudPaper Class="mx-auto d-flex flex-column" Style="width:330px;" Elevation="0">
+
+                    <MudText class="mx-auto  " Typo="Typo.h4">Scan with <span Style="@($"color:{Palette.Info};")">QRS</span></MudText>
+                    
+                    <MudText class="mx-auto  mb-6" Typo="Typo.body2">scan with QRS app to continue</MudText>
+                    
+                    <div class="mx-auto" style="height:304px; width:304px; border: 2px solid black">
+                        <a href="qrid://@QrCodeString">
+                            <QRCodeWriter Text="@QrCodeString" Width="300" Heigth="300"></QRCodeWriter>
+                        </a>
+                    </div>
+
+                    <MudPaper class="mx-auto mt-4" Elevation="0">
+                        <MudButton OnClick="CancelClick" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Secondary" Class="flex-grow-0 ma-4">Cancel</MudButton>
+                        @*<MudButton OnClick="Cancel" Class="flex-grow-0 ma-4">Cancel</MudButton>*@
+                    </MudPaper>
+
+                </MudPaper>
+            }
+            else if (DisplayMode == "loading")
+            {
+                <MudPaper  Class="d-flex flex-column justify-center flex-grow-1 gap-4" Elevation="0">
+                    <MudText class="mx-auto ma-4" Typo="Typo.h4">Waiting for mobile app ...</MudText>
+
+                    <MudStack Justify="Justify.FlexStart" >
+                        <MudText Align="Align.Left" class="mx-auto ma-1" Style="display: list-item; list-style: disc;">press "Continue" button in your QRS mobile app <br />to finish Pairing</MudText>
+                        <MudText Align="Align.Left" class="mx-auto ma-1" Style="display: list-item; list-style: disc;">then press "YES" button in your QRS mobile app <br />to confirm the requested key operation</MudText>
+                        <MudText Align="Align.Left" class="mx-auto ma-1" Style="display: list-item; list-style: disc;">this popup window will close automatically once <br />the results of the key operation are received</MudText>
+                    </MudStack>
+                    
+@*
+                    <ul class="justify-center">
+                        <li class="mx-auto ma-1">press "Continue" button in your QRS mobile app</li>
+                        <li class="mx-auto ma-1">then press "YES" button in your QRS mobile app <br />to confirm the requested key operation</li>
+                    </ul>
+                *@
+                </MudPaper>
+            }
+            else if (DisplayMode == "userinput")
+            {
+                <MudText class=" ml-4 mb-8" Typo="Typo.h4">Pairing with Mobile App</MudText>
+                <div style="height:360px; width:360px; border: 2px none green">
+
+                    <MudPaper class="ml-4 mt-4" Elevation="0">
+                        <MudText>Press "Continue Pairing" button in your Mobile App to see the 3-letter Pairing Code</MudText>
+                    </MudPaper>
+
+                    <MudTextField T="string" Label="Pairing Code from mobile app" Variant="Variant.Outlined" 
+                    @bind-Text="@UserInput" Class="flex-grow-0 ma-4"
+                                  HelperText="3 lowercase characters" HelperTextOnFocus="false" />
+                    
+                    <MudButton @onclick=ContinueClick Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowForward" Color="Color.Secondary" Class="flex-grow-0 ma-4">Continue</MudButton>
+                    <MudButton OnClick="CancelClick" Class="flex-grow-0 ma-4">Cancel</MudButton>
+
+                </div>
+            }
+            else
+            {
+                <MudText class=" mb-8" Typo="Typo.h4">Download QRS app</MudText>
+
+                <div style="height:360px; width:360px; border: 2px none green">
+
+                    <MudPaper class="mt-4" Elevation="0">
+                        <MudText>Download free QRS app and use it with any website, desktop or mobile application that supports QRS protocols.</MudText>
+                    </MudPaper>
+
+                    <MudPaper class="mt-4 mb-4" Elevation="0">
+                        <MudLink Href="#">
+                            <MudImage class="mr-4 mt-4 mb-4" Src="_content/Qrs.App.PasswordManager.Components/img/mobile/logo_app_store.svg"></MudImage>
+                        </MudLink>
+
+                        <MudLink Href="#">
+                            <MudImage class="ma-4" Src="_content/Qrs.App.PasswordManager.Components/img/mobile/logo_play_market.svg"></MudImage>
+                        </MudLink>
+                    </MudPaper>
+
+                    <MudPaper Elevation="0">
+                        <MudButton OnClick="BackClick" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" Color="Color.Secondary" Class="flex-grow-0 mt-4">Back</MudButton>
+                        @*<MudButton OnClick="Cancel" Class="flex-grow-0 ma-4">Cancel</MudButton>*@
+                    </MudPaper>
+
+                </div>
+            }
+
+           
+        </MudContainer>
+    </DialogContent>
+
+</MudDialog>
+
+@code {
+
+    [CascadingParameter] 
+    IDialogReference MudDialog { get; set; }
+
+    [Parameter]
+    public string QrCodeString { get; set; }
+
+    [Parameter]
+    public string UserInput { get; set; }
+
+    [Parameter]
+    public string DisplayMode { get; set; }
+
+
+}

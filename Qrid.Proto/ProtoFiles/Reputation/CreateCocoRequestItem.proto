@@ -1,0 +1,16 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Reputation";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+
+message CreateCocoRequestItem
+{
+    bool is_new = 1;
+    string contact_id = 2;
+    string recipient = 3;
+    SymEncryptedBytes encrypted_contact_token_key = 4;
+    SymEncryptedBytes encrypted_complain_token_key = 5;
+    CryptoKey contact_token_key = 6;
+}

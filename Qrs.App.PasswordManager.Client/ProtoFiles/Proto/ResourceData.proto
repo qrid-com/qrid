@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.App.PasswordManager.Client.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+message ResourceData
+{
+    string resource_type = 1;
+    string resource_name = 2;
+    string username = 3;
+    string resource_notes = 4;
+    bytes secret_envelope_bytes = 5;
+    string file_path = 6;
+    google.protobuf.Timestamp created = 7;
+    string resource_id = 8;
+}
+
+
+

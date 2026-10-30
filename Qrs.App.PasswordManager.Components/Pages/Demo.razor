@@ -1,0 +1,56 @@
+﻿@page "/demo"
+@using Qrs.App.PasswordManager.Components.Demo;
+@inherits Code.QridComponentBase
+
+<PageTitle>Demo</PageTitle>
+
+<h1>Demo</h1>
+
+
+
+<MudPaper MaxWidth="600px" Class="pa-8 ma-2" Style="@($"background-color:{Palette.BackgroundGray};")" Outlined="true">
+    <MudTextField T="string"  Variant="Variant.Text" Label="Var Text" Class="flex-grow-1" ></MudTextField>
+    
+    <MudTextField T="string" Variant="Variant.Text" Label="" Class="flex-grow-1" Adornment="Adornment.Start" AdornmentText="From:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"></MudTextField>
+    <MudTextField T="string" Variant="Variant.Text" Label="" Class="flex-grow-1" Adornment="Adornment.Start" AdornmentText="To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"></MudTextField>
+    <MudTextField T="string" Variant="Variant.Text" Label="" Class="flex-grow-1" Adornment="Adornment.Start" AdornmentText="Subject:&nbsp;&nbsp;"></MudTextField>
+
+    <MudTextField Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1 " Adornment="Adornment.Start" AdornmentText="From:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"></MudTextField>
+    <MudTextField Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1 " 
+        Adornment="Adornment.Start" 
+        AdornmentText="To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" 
+        OnAdornmentClick="ToClick"></MudTextField>
+    <MudTextField Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1 " Adornment="Adornment.Start" AdornmentText="Subject:&nbsp;&nbsp;"></MudTextField>
+    
+    <MudTextField Style="@($"background-color:{Colors.Red.Lighten2};")" InputMode="InputMode.search" Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1" Adornment="Adornment.Start" AdornmentText="From:" AdornmentColor="Color.Tertiary"></MudTextField>
+    <MudTextField Style="@($"background-color:#FAFAFA;")" InputMode="InputMode.search" Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1" Adornment="Adornment.Start" AdornmentText="To:" AdornmentColor="Color.Tertiary"></MudTextField>
+    <MudTextField Margin="Margin.Dense" T="string" Variant="Variant.Outlined" Label="" Class="flex-grow-1 " Adornment="Adornment.Start" AdornmentText="Subject:" AdornmentColor="Color.Secondary"></MudTextField>
+</MudPaper>
+
+
+
+<DropdownButton1/>
+
+<h2>Upload Files</h2>
+<Upload1></Upload1>
+
+<h2>Menu</h2>
+<MudMenu Label="Full Menu Width" Variant="Variant.Filled" Color="Color.Primary" FullWidth="true">
+    <MudMenuItem>1</MudMenuItem>
+    <MudMenuItem>2</MudMenuItem>
+    <MudMenuItem>3</MudMenuItem>
+</MudMenu>
+
+
+
+@code {
+
+    public void ToClick()
+    {
+        // set focus to "To:"
+        
+    }
+
+
+}
+

@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Notes";
+
+import "google/protobuf/timestamp.proto";
+
+message NoteMessage
+{
+
+int32 id = 1;
+int32 user_id = 2;
+string title =3;
+string url = 4;
+string content_source = 5;
+string content_html = 6;
+int32 lines_count = 7;
+        
+int32 copy_counter = 8;
+string status = 9;
+google.protobuf.Timestamp create_date = 10;
+google.protobuf.Timestamp update_date = 11;
+        
+
+repeated string tags = 12;
+        
+
+    //repeated Attachment attachments = 5;
+}
+
+
+

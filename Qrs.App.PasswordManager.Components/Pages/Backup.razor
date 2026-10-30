@@ -1,0 +1,115 @@
+﻿@inherits Code.QridComponentBase
+@page "/backup"
+
+
+<MudPaper Width="600px" Class="ml-16 pl-16 d-flex flex-column justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudText class=" mt-10" Typo="Typo.h4">Backup</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-column justify-start gap-2">
+        <MudText class="justify-start" Typo="Typo.body1">
+            Backup your password data to one or more destinations. To add a new backup destination, please edit the Settings File directly: 
+        </MudText>
+        <MudText>'@App.SettingsFilePath'</MudText>
+    </MudPaper>
+
+
+
+    <MudTable T="Code.BackupOption" Items="@BackupOptions" Hover="true" @ref="mudTable"
+              MultiSelection="false" SelectOnRowClick="true" OnRowClick="@OnRowClick"
+              Style="overflow-y: auto; " FixedHeader="false"
+              Class="flex-grow-1"
+              RowClass="cursor-pointer" Square="true" Bordered="false" Elevation="0" >
+        <HeaderContent>
+            <MudTh Style="text-align:center">X</MudTh>
+            
+            <MudTh>Backup To:</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="x">
+                <MudCheckBox T="bool" Checked="@context.IsSelected" Disabled="true"  Size="Size.Small" Color="Color.Primary"></MudCheckBox>
+            </MudTd>
+            
+            <MudTd DataLabel="xxxx">@context.BackupFolder</MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No backup destinations has been configured.</MudText>
+        </NoRecordsContent>
+    </MudTable>
+
+
+
+
+
+    
+
+
+
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-start gap-8">
+        <MudButton @onclick=BackupClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Secondary">
+            <MudText>Backup</MudText>
+        </MudButton>
+
+        <MudButton @onclick=CancelClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Cancel"
+                   Color="Color.Default">
+            <MudText>Cancel</MudText>
+        </MudButton>
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+    private MudTable<Code.BackupOption> mudTable;
+    private List<Code.BackupOption> BackupOptions { get; set; }
+    private HashSet<Code.BackupOption> selectedItems = new HashSet<Code.BackupOption>();
+
+    public async Task BackupClick()
+    {
+        // BACKUP
+        App.PerformBackupToAllDestinations(BackupOptions);
+
+        // SHOW RESULTS
+        string backupResult;
+        string backupDetails;
+        App.GetBackupResults(BackupOptions, out backupResult, out backupDetails);
+        MarkupString backupDetailsMarkup = new MarkupString(backupDetails);
+
+        string title;
+        if (backupResult == "S")
+            title = "Backup - Success";
+        else 
+            if (backupResult == "PS")
+                title = "Backup - Partial Success";
+            else
+                title = "Backup - Error";
+
+        // todo - pass markupstring
+        await App.ShowMessageBoxAsync(title, backupDetailsMarkup);
+
+        //App.NavigateToInbox();
+    }
+
+    public async Task CancelClick()
+    {
+        App.NavigateToInbox();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BackupOptions = App.GetBackupOptions();
+
+    }
+
+    void OnRowClick(TableRowClickEventArgs<Code.BackupOption> args)
+    {
+        args.Item.IsSelected = !args.Item.IsSelected;
+    }
+
+}

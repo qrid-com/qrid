@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Qrs.App.Vault.Avalonia.Dialogs.InputDialog"
+        Title="Input" Width="350" Height="170"
+		
+		Loaded="Window_Loaded"
+		
+		>
+
+	<StackPanel Margin="10">
+		<TextBlock x:Name="InputLabel" IsVisible="true" TextWrapping="Wrap" Margin="0,10,0,0"/>
+		<TextBox x:Name="InputBox" Margin="0,10,0,0" ></TextBox>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10" Margin="0,10,0,0">
+			<Button x:Name="OkButton" IsDefault="true" Content="Ok" Click="Ok_Click"/>
+			<Button x:Name="CancelButton" IsCancel="true" Content="Cancel" Click="Cancel_Click"/>
+		</StackPanel>
+	</StackPanel>
+	
+	
+</Window>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Qrs.App.Vault.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "extract C:\\Users\\alex\\Documents\\444.vault"
+    }
+  }
+}

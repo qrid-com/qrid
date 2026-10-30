@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Enclave";
+
+import "google/protobuf/timestamp.proto";
+
+message StatusResponse
+{
+        string user_id = 1; // user id of the user who made the request - comes from enclave_request.user_id column
+        string request_type = 2; // tells to what class Response should be deserialized into 
+        string status = 3;
+        bytes response = 4;
+}
+

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.App.PasswordManager.Client.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrs.App.PasswordManager.Client/ProtoFiles/Proto/AttachmentHeader.proto";
+import "Qrs.App.PasswordManager.Client/ProtoFiles/Proto/AttachmentBody.proto";
+
+message Attachment
+{
+    AttachmentHeader header = 1; 
+    AttachmentBody body = 2;
+}
+
+

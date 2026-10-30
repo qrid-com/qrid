@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/TypedData.proto";
+
+message TypedDataList
+{
+    repeated TypedData items = 1;
+}
+

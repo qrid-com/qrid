@@ -1,0 +1,155 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor;
+@inherits Code.QridLayoutBase
+
+
+<MudDialogProvider FullWidth="true" MaxWidth="MaxWidth.Medium"/>
+<MudSnackbarProvider/>
+
+<AuthorizeView>
+<Authorized>
+<MudLayout 
+>
+
+    <MudAppBar Elevation="1" Fixed="false" Dense="true" >
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                <MudText Typo="Typo.h5" Class="ml-3">Qrs Password Manager (@Code.ApplicationService.ENVIRONMENT_NAME)</MudText>
+        
+        @*
+                @ondragstart=""
+                @ondragend=""
+
+                @ondragleave="GlobalDragLeave"
+
+
+        <MudTextField T="string" Variant="Variant.Outlined" Class=""  Adornment="Adornment.End" AdornmentIcon="@Icons.Filled.Search" />
+        *@
+
+        @*
+        <MudButton 
+            StartIcon="@Icons.Material.Filled.Refresh"
+            Size = "Size.Small"
+            Class="ml-8 mr-4"
+            Color="Color.Inherit" 
+            Edge="Edge.Start" 
+            Variant="Variant.Text"
+            OnClick="@((e) => App.PerformCheckMailAsync())" 
+            >Check Mail</MudButton>
+        *@
+
+        <MudSpacer />
+
+                <MudText Color="Color.Inherit" Class="mr-6" Edge="Edge.End">@Context?.Folder?.FolderPath</MudText>
+
+                <MudMenu Dense AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Icon="@Icons.Material.TwoTone.MoreVert" Color="Color.Inherit">
+                    <MudMenuItem Label="Export" OnClick="@((e) => App.Navigate("/export"))">Export</MudMenuItem>
+                    <MudMenuItem Label="Import" OnClick="@((e) => App.Navigate("/import"))">Import</MudMenuItem>
+                    <MudDivider />
+                    <MudMenuItem Label="Open All Secrets" OnClick="@((e) => App.DoOpenAllSecrets()   )">Open All Secrets</MudMenuItem>
+                </MudMenu>
+
+
+    </MudAppBar>
+
+    <MudDrawer Class="d-flex flex-column" @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" DrawerWidthLeft="80" >
+
+        <MudButton  OnClick="NewMessageClick" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.AddCircleOutline" Color="Color.Secondary" Class="mx-6 my-6"  >New</MudButton>
+        
+        @*
+        <MudButton OnClick="CheckMailClick" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Secondary" Class="mx-6 my-6">Check Mail</MudButton>
+
+        <MudButton OnClick="TestClick" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.QuestionMark" Color="Color.Secondary" Class="mx-6 my-6">Test</MudButton>
+        *@
+
+        <NavMenu/>
+
+        <div class="flex-grow-1" style=" border: 0px none black">&nbsp;</div>
+
+                @if (false)
+                {
+                    <MudButton Style="white-space: nowrap;" StartIcon="@Icons.Material.Filled.QuestionMark"
+                               Size="Size.Small"
+                               Class="ml-2 mr-2 mb-6"
+                               Color="Color.Inherit"
+                               Edge="Edge.Start"
+                               Variant="Variant.Text"
+                               OnClick="@((e) => App.PerformTest())">Test</MudButton>
+                }
+
+        <MudButton Style="white-space: nowrap;" StartIcon="@Icons.Material.Filled.Refresh"
+            Size="Size.Small"
+            Class="ml-2 mr-2 mb-6"
+            Color="Color.Inherit"
+            Edge="Edge.Start"
+            Variant="Variant.Text"
+                           OnClick="@((e) => App.PerformReloadAsync(App.Settings.DataPath))">Reload</MudButton>
+        
+
+    </MudDrawer>
+
+
+    
+        <MudMainContent Style="padding-top:0px;">
+            
+            <div style="background-color:WHITE;  min-height: 100%; height: calc(100vh - var(--mud-appbar-height) + var(--mud-appbar-height) / 4 );">
+                <div style=" height:100%;">
+                    @Body
+                </div>
+            </div>      
+                
+        </MudMainContent>
+
+        <Popover/>
+            
+
+</MudLayout>
+</Authorized>
+
+
+<NotAuthorized>
+    <MudLayout>
+        <MudMainContent>
+            @Body
+        </MudMainContent>
+
+    </MudLayout>
+</NotAuthorized>
+
+</AuthorizeView>
+
+@code {
+    bool _drawerOpen = true;
+
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+
+
+
+
+
+
+
+
+    public async Task CheckMailClick()
+    {
+        //await Context.GetNewMailAsync();
+
+        await App.PerformReloadAsync(App.Settings.DataPath);
+
+        //Parent.StateChanged();
+    }
+
+    public async Task NewMessageClick()
+    {
+        await App.PerformNewItemShowClick();
+    }
+
+    public async Task TestClick()
+    {
+        App.PerformTest();
+    }
+}

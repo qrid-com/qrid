@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Controls.Tmp"
+             x:Name="this">
+  <ContentView.Content>
+        <StackLayout Spacing="0">
+
+            <controls:SubTitleView Title="Complete Flow"/>
+            <Label Style="{StaticResource ButtonInfo}" >- Client Application (CA) wants to access data in QRS encrypted file;</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- QRS file contains A) data encrypted with DEK, and B) DEK encrypted with KEK;</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA generates new random Tunnel Session Keys (symmetric Sym and asymmetric Asym);</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA decides what Tunnel Server to use, based on local config or using default servers provided by qrid.com</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA calls Tunnel Server to open the tunnel, using Asym PubKey as Tunnel Id</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA displays QR code containing Tunnel Server uri, Sym Key and Asym PubKey (Tunnel Id)</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA starts long polling loop waiting for response from QRS app</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- User scans QR code using QRS mobile app</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- Using info from QR code, QRS connects to Tunnel Server, fetches and decrypts Opening Message</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- QRS confirms if the user wants to proceed</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- QRS uses KEK to decrypt DEK</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- QRS prepares Response Message. It double encrypts DEK with Tunnel Session Keys - first with Sym and then with Asym PubKey</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- QRS sends Response Message to the Tunnel</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA receives Response Message from the Tunnel and exits long polling loop</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA uses Session Keys to decrypt Response Message and obtain unencrypted DEK key</Label>
+            <Label Style="{StaticResource ButtonInfo}" >- CA uses DEK Key to decrypt the data</Label>
+
+
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

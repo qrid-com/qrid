@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="460" d:DesignHeight="180"
+        x:Class="Qrs.App.EmailTools.Avalonia.DeletionProgressWindow"
+        Title="Deleting messages"
+        Width="460" Height="180"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Opened="Window_Opened">
+  <Grid Margin="16" RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="10">
+    <TextBlock Grid.Row="0" Text="Deleting queued messages" FontSize="16" FontWeight="SemiBold"/>
+    <ProgressBar Grid.Row="1" x:Name="progressBar" Minimum="0" Maximum="100" Value="0" Height="18"/>
+    <TextBlock Grid.Row="2" x:Name="txtProgress" Text="Starting..." TextWrapping="Wrap"/>
+    <Button Grid.Row="4" x:Name="btnClose" Content="Close" HorizontalAlignment="Right"
+            IsEnabled="False" Click="btnClose_Click"/>
+  </Grid>
+</Window>

@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto.Api";
+
+enum KeyOp
+{
+    KEY_OP_WRAP_NEW_PAYLOAD = 0;
+    KEY_OP_WRAP_UPDATED_PAYLOAD = 1;
+    KEY_OP_UNWRAP = 2;
+    KEY_OP_RESEAL = 3;
+}
+
+
+

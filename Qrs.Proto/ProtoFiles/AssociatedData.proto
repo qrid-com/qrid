@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrs.Proto/ProtoFiles/AssociatedDataItem.proto";
+import "Qrs.Proto/ProtoFiles/AssociatedDataType.proto";
+
+message AssociatedData
+{
+    AssociatedDataType associated_data_type = 1;
+    bytes bytes = 2;
+}
+
+
+

@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+import "Qrid.Common.Proto/ProtoFiles/CanonicalCrypto/EccPrivateKey.proto";
+import "Qrid.Common.Proto/ProtoFiles/CanonicalCrypto/MlKemPrivateKey.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+
+message HybridEcMlKemPrivateKey
+{
+
+    CryptoKey ecc_private_key = 1;
+    CryptoKey ml_kem_private_key = 2;
+
+}

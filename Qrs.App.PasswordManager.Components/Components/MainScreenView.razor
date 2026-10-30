@@ -1,0 +1,206 @@
+@using Qrid.Common.Client.Misc
+@using Qrs.App.PasswordManager.Client.Models;
+@inherits Code.QridComponentBase
+
+
+<MudPaper Elevation=0 Class="d-flex align-stretch flex-grow-1 gap-0" Style="height:100%;" >
+    <MadSplitter @ref="_splitter" @bind-Dimension="@State.PersistentState.ListWidth"
+                 EnableSlide="true" EnableMargin="false" Sensitivity="_sensitivity"
+                 BarStyle="width:2px !important; background-color: #dee2e6 !important; margin-left: 8px; margin-right: 10px; margin-top:2px; margin-bottom: 2px;"
+                 Height="100%"  Bordered="false">
+
+        <StartContent>
+            <div Class="pb-0 d-flex flex-1 mr-1" Style="@($"background:{Colors.BlueGray.Lighten5}; height:100%; overflow: hidden;")">
+                <ListView ViewModel="Vm.ListVm" @ref="ListView" Parent=@this  />
+            </div>
+        </StartContent>
+
+        <EndContent>
+            <div Class="pb-0 d-flex flex-1 ml-2" Style="@($"background:{Colors.Gray.Lighten5}; height:100%;")">
+                <DetailsView ViewModel="Vm.DetailsVm" @ref="DetailsView" Parent=@this />
+            </div>
+        </EndContent>
+
+    </MadSplitter>
+</MudPaper>
+
+@code {
+
+    MadSplitter _splitter;
+    Color _color = Color.Default;
+    
+    double _sensitivity = 0.1d;
+    double _percentage = 50;
+
+
+
+    public MainScreenVm Vm => (MainScreenVm)ViewModel;
+
+    public string FolderPath { get; set; }
+
+    public ListView ListView;
+    public DetailsView DetailsView;
+
+    public string ResizingStyle => $"width: {State.LeftMenuWidth}px; max-width: {State.LeftMenuWidth}px; min-width: {State.LeftMenuWidth}px;";
+
+    private readonly DebounceHelper debouncer = new DebounceHelper();
+
+    // Message=@SelectedMessage
+    // public ResourceInfo SelectedMessage;
+
+
+    private async Task SelectedMessageChangedHandler(ResourceInfo selectedMessage)
+    {
+        // SelectedMessageChanged="SelectedMessageChangedHandler"
+        // Message=@SelectedMessage
+
+        //SelectedMessage = selectedMessage;
+    }
+
+    private void MainDividerMouseDown(MouseEventArgs e)
+    {
+        State.MainDivider.IsDrag = true;
+        State.MainDivider.StartX = Convert.ToInt32(e.PageX);
+        State.MainDivider.StartWidth = State.LeftMenuWidth;
+
+        
+
+    }
+
+    private void LayoutMouseMove2(MouseEventArgs e)
+    {
+        
+    }
+
+    private void LayoutMouseMove(MouseEventArgs e)
+    {
+
+        if (State.MainDivider.IsDrag)
+        {
+            // resizing LEFT MENU and COLUMNS AREA
+            var newWidth = State.MainDivider.StartWidth + Convert.ToInt32(e.PageX) - State.MainDivider.StartX;
+
+            LogInfo($"LayoutMouseMove(MAIN DIVIDER), old LeftMenuWidth={State.LeftMenuWidth}, newWith={newWidth})");
+
+            //State.ColumnWidth = newWidth;
+            //State.RenderHidden = true;
+
+            App.DoSetMessageListWidth(newWidth);
+            LogInfo($"LayoutMouseMove(MAIN LEFT DIVIDER), new LeftMenuWidth={State.LeftMenuWidth})");
+        }
+
+    }
+
+    private void LayoutMouseUp(MouseEventArgs e)
+    {
+        State.MainDivider.IsDrag = false;
+    }
+
+    private void LayoutMouseLeave()
+    {
+        LayoutMouseUp(null);
+    }
+
+
+
+
+
+    public override void StateChangedCascade()
+    {
+        StateChanged();
+        Vm.ListVm?.StateChangedCascade();
+        Vm.DetailsVm?.StateChangedCascade();
+    }
+
+
+
+
+
+
+    #region Lifecycle overrrides - IN ORDER OF EXECUTION (TOP TO BOTTOM)
+
+    //public override async Task SetParametersAsync(ParameterView parameters)
+    //{
+    //    Logger.LogInformation($"{Tag} SetParametersAsync-start");
+    //    LogControls();
+    //    await base.SetParametersAsync(parameters);
+    //    LogControls();
+    //    Logger.LogInformation($"{Tag} SetParametersAsync-end");
+
+    //}
+
+
+    //protected override void OnInitialized()
+    //{
+    //    App.RegisterPopover(this);
+    //    base.OnInitialized(); // do we need this?
+    //}
+
+    // protected override void OnInitialized()
+    // {
+
+    // App.RegisterResourceBoxView(this, FolderType);
+
+    //     //Logger.LogInformation($"{Tag} OnInitialized-start");
+    //     //LogControls();
+    //     base.OnInitialized();
+    //     //LogControls();
+    //     //Logger.LogInformation($"{Tag} OnInitialized-end");
+    // }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        Context.LogDebug("OnAfterRenderAsync - before App.RegisterResourceBoxView");
+
+        await App.RegisterMainScreenView(this, null);
+
+        Context.LogDebug("OnAfterRenderAsync - after App.RegisterResourceBoxView");
+
+
+
+
+    }
+
+    //protected override void OnParametersSet()
+    //{
+    //    Logger.LogInformation($"{Tag} OnParametersSet-start");
+    //    base.OnParametersSet();
+    //    Logger.LogInformation($"{Tag} OnParametersSet-end");
+    //}
+
+    //protected override async Task OnParametersSetAsync()
+    //{
+    //    Logger.LogInformation($"{Tag} OnParametersSetAsync-start");
+    //    LogControls();
+    //    await base.OnParametersSetAsync();
+    //    LogControls();
+    //    Logger.LogInformation($"{Tag} OnParametersSetAsync-end");
+    //}
+
+    //protected override void OnAfterRender(bool firstRender)
+    //{
+    //    Logger.LogInformation($"{Tag} OnAfterRender({firstRender})-start");
+    //    LogControls();
+    //    base.OnAfterRender(firstRender);
+    //    LogControls();
+    //    Logger.LogInformation($"RENDERED: {Tag}, PARENT: N/A ");
+    //    Logger.LogInformation($"{Tag} OnAfterRender({firstRender})-end");
+    //}
+
+    //protected override async Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    Logger.LogInformation($"{Tag} OnAfterRenderAsync({firstRender})-start");
+    //    LogControls();
+    //    await base.OnAfterRenderAsync(firstRender);
+    //    LogControls();
+    //    Logger.LogInformation($"{Tag} OnAfterRenderAsync({firstRender})-end");
+    //}
+
+        #endregion
+
+
+    
+
+}

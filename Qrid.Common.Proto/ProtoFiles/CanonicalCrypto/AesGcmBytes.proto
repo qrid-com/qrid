@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message AesGcmBytes
+{
+    reserved 1;
+    bytes nonce = 2;
+    int32 mac_length = 3;
+    bytes bytes_with_mac = 10;
+}

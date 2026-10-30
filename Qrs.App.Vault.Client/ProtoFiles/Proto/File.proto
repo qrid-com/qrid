@@ -1,0 +1,19 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.App.Vault.Client.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+message File
+{
+    string path = 1;
+    string node_type = 2;
+    bytes content = 3;
+    // content_hash
+    string padding = 4;
+    // created
+    // updated
+}
+
+
+

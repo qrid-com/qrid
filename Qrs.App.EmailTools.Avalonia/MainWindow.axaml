@@ -1,0 +1,171 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1180" d:DesignHeight="760"
+        x:Class="Qrs.App.EmailTools.Avalonia.MainWindow"
+        Title="QRID Mail"
+        Width="1180" Height="760"
+        Opened="MainWindow_Opened">
+  <Grid RowDefinitions="Auto,*" Margin="10">
+    <Border Grid.Row="0" Padding="10" Background="#eef3f8" CornerRadius="6" Margin="0,0,0,8">
+      <TextBlock Text="Cross-platform mail client for Gmail, Outlook, and custom IMAP/SMTP accounts. Gmail and Outlook sign in with OAuth2 (a browser window opens on first use); the password field is only used for custom accounts and is not saved." TextWrapping="Wrap"/>
+    </Border>
+
+    <Grid Grid.Row="1" ColumnDefinitions="280,8,*" RowDefinitions="*">
+      <Grid Grid.Column="0" RowDefinitions="Auto,*,Auto" RowSpacing="8">
+        <TextBlock Text="Accounts" FontSize="18" FontWeight="SemiBold"/>
+        <ListBox Grid.Row="1" x:Name="lstAccounts" SelectionChanged="lstAccounts_SelectionChanged">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Margin="2,4">
+                <TextBlock Text="{Binding Label}" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Provider}" FontSize="11" Foreground="Gray"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="2" Spacing="6">
+          <Button Content="Add account" Click="btnAddAccount_Click"/>
+          <Button Content="Remove selected" Click="btnRemoveAccount_Click"/>
+          <Button Content="Save settings" Click="btnSaveAccounts_Click"/>
+          <Button Content="Sync all to local DB" Click="btnSyncAll_Click"/>
+        </StackPanel>
+      </Grid>
+
+      <GridSplitter Grid.Column="1" ResizeDirection="Columns" Background="LightGray" Width="8"/>
+
+      <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" RowSpacing="8">
+        <TabControl x:Name="tabMain" Grid.Row="0" Grid.RowSpan="2">
+          <TabItem Header="Account">
+            <ScrollViewer>
+              <Grid Margin="10" ColumnDefinitions="160,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="8" ColumnSpacing="10">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Provider" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cmbProvider" SelectionChanged="cmbProvider_SelectionChanged"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Display name" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtDisplayName"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Email address" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtEmailAddress"/>
+
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Username" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtUsername"/>
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Password / app password" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtPassword" PasswordChar="*"/>
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="IMAP host" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtIncomingHost"/>
+
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="IMAP port" VerticalAlignment="Center"/>
+                <NumericUpDown Grid.Row="6" Grid.Column="1" x:Name="numIncomingPort" Minimum="1" Maximum="65535"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="IMAP SSL" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="7" Grid.Column="1" x:Name="chkIncomingSsl"/>
+
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="SMTP host" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="8" Grid.Column="1" x:Name="txtOutgoingHost"/>
+
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="SMTP port" VerticalAlignment="Center"/>
+                <NumericUpDown Grid.Row="9" Grid.Column="1" x:Name="numOutgoingPort" Minimum="1" Maximum="65535"/>
+
+                <TextBlock Grid.Row="10" Grid.Column="0" Text="SMTP STARTTLS" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="10" Grid.Column="1" x:Name="chkOutgoingStartTls"/>
+
+                <StackPanel Grid.Row="11" Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                  <Button Content="Apply to selected" Click="btnApplyAccount_Click"/>
+                  <Button Content="Load folders" Click="btnLoadFolders_Click"/>
+                </StackPanel>
+              </Grid>
+            </ScrollViewer>
+          </TabItem>
+
+          <TabItem Header="Mailbox">
+            <Grid Margin="10" ColumnDefinitions="210,8,*" RowDefinitions="Auto,*" RowSpacing="8">
+              <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Spacing="8">
+                <Button Content="Refresh folders" Click="btnLoadFolders_Click"/>
+              </StackPanel>
+              <ListBox Grid.Row="1" Grid.Column="0" x:Name="lstFolders" SelectionChanged="lstFolders_SelectionChanged">
+                <ListBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding DisplayName}" Margin="2,4"/>
+                  </DataTemplate>
+                </ListBox.ItemTemplate>
+              </ListBox>
+              <GridSplitter Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" ResizeDirection="Columns" Background="LightGray" Width="8"/>
+              <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" RowDefinitions="Auto,260,8,*" RowSpacing="8">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8">
+                  <Button Content="Delete from server only (keep the client copy)" Click="btnDeleteFromServer_Click"/>
+                  <Button Content="Delete" Click="btnDelete_Click"/>
+                </StackPanel>
+                <DataGrid x:Name="gridMessages" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended" SelectionChanged="gridMessages_SelectionChanged">
+                  <DataGrid.Columns>
+                    <DataGridTextColumn Header="From" Binding="{Binding From}" Width="2*"/>
+                    <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="3*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                  </DataGrid.Columns>
+                </DataGrid>
+                <GridSplitter Grid.Row="2" ResizeDirection="Rows" Background="LightGray" Height="8"/>
+                <TextBox Grid.Row="3" x:Name="txtMessageDetails" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"/>
+              </Grid>
+            </Grid>
+          </TabItem>
+
+          <TabItem Header="Compose">
+            <Grid Margin="10" RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="8">
+              <TextBox x:Name="txtComposeTo" Watermark="Recipients"/>
+              <TextBox Grid.Row="1" x:Name="txtComposeSubject" Watermark="Subject"/>
+              <TextBlock Grid.Row="2" Text="Message"/>
+              <TextBox Grid.Row="3" x:Name="txtComposeBody" AcceptsReturn="True" TextWrapping="Wrap"/>
+              <Button Grid.Row="4" Content="Send" HorizontalAlignment="Right" Click="btnSend_Click"/>
+            </Grid>
+          </TabItem>
+
+          <TabItem Header="Review and Delete">
+            <Grid Margin="10" RowDefinitions="Auto,220,Auto,Auto,*" RowSpacing="8">
+              <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8">
+                <Button Content="Refresh" Click="btnRefreshDeletion_Click"/>
+                <TextBlock Text="Summary of messages queued for deletion, grouped by account, folder and from-address."
+                           VerticalAlignment="Center" TextWrapping="Wrap"/>
+              </StackPanel>
+
+              <DataGrid x:Name="gridDeletionSummary" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Account" Binding="{Binding Account}" Width="*"/>
+                  <DataGridTextColumn Header="Folder" Binding="{Binding Folder}" Width="*"/>
+                  <DataGridTextColumn Header="From address" Binding="{Binding FromAddress}" Width="*"/>
+                  <DataGridTextColumn Header="Server msgs" Binding="{Binding ServerMessageCount}" Width="Auto"/>
+                  <DataGridTextColumn Header="Server att." Binding="{Binding ServerAttachmentsCount}" Width="Auto"/>
+                  <DataGridTextColumn Header="Server size" Binding="{Binding ServerTotalSize}" Width="Auto"/>
+                  <DataGridTextColumn Header="Client msgs" Binding="{Binding ClientMessageCount}" Width="Auto"/>
+                  <DataGridTextColumn Header="Client size" Binding="{Binding ClientTotalSize}" Width="Auto"/>
+                  <DataGridTextColumn Header="Min date" Binding="{Binding MinDate}" Width="Auto"/>
+                  <DataGridTextColumn Header="Max date" Binding="{Binding MaxDate}" Width="Auto"/>
+                </DataGrid.Columns>
+              </DataGrid>
+
+              <Button Grid.Row="2" Content="Delete" HorizontalAlignment="Left" Click="btnRunDeletion_Click"/>
+
+              <TextBlock Grid.Row="3" Text="Messages to be deleted (top 1000). Click a column header to sort."/>
+
+              <DataGrid x:Name="gridDeletionMessages" Grid.Row="4" AutoGenerateColumns="False" IsReadOnly="True"
+                        CanUserSortColumns="True" Sorting="gridDeletionMessages_Sorting">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="Auto" Tag="Date"/>
+                  <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*" Tag="Address"/>
+                  <DataGridTextColumn Header="Subject" Binding="{Binding Subject}" Width="2*" Tag="Subject"/>
+                  <DataGridTextColumn Header="Att." Binding="{Binding AttachmentCount}" Width="Auto" Tag="AttachmentCount"/>
+                  <DataGridTextColumn Header="Body preview" Binding="{Binding BodyPreview}" Width="2*" Tag="BodyPreview"/>
+                  <DataGridTextColumn Header="Error" Binding="{Binding ErrorMessage}" Width="*" Tag="ErrorMessage"/>
+                </DataGrid.Columns>
+              </DataGrid>
+            </Grid>
+          </TabItem>
+        </TabControl>
+
+        <TextBlock Grid.Row="2" x:Name="txtStatus" Text="Ready"/>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

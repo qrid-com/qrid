@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Mail";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Proto/ProtoFiles/Mail/Attachment.proto";
+
+message MailMessage
+{
+    string subject = 1; 
+    string sender = 2;
+    repeated string receivers = 3;
+    string body = 4;
+    repeated Attachment attachments = 5;
+}
+
+
+

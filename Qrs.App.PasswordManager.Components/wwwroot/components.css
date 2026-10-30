@@ -1,0 +1,41 @@
+﻿body,
+html {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+div#app {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+
+.mud-list-item-text {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+#msgbody textarea {
+    background-color: gray !important;
+    display: flex !important;
+    flex: 1 !important;
+}
+
+#msgbody .qrid-input-message-body div.mud-input {
+    background-color: cadetblue;
+}
+
+#msgbody .qrid-input-message-body div.mud-input-control-input-container {
+    background-color:aquamarine;
+}
+
+
+
+
+
+

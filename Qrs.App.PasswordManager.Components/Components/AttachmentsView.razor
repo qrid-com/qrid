@@ -1,0 +1,34 @@
+@using Qrs.App.PasswordManager.Client.Models;
+@using Qrs.App.PasswordManager.Client.Proto;
+@inherits Code.QridComponentBase
+
+@if (Message.Attachments.Count > 0)
+{
+    <div style="@Style">
+    <MudPaper Class="pt-1 pb-1 d-flex align-content-center flex-wrap flex-grow-1 gap-2" Elevation="0">
+    @foreach(var a in Message.Attachments)
+    {
+            <AttachmentItem Attachment="@a" OnRemove="RemoveAttachment" EnableDelete="@EnableDelete"></AttachmentItem>
+    }
+    </MudPaper>
+    </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public ResourceInfo Message { get; set; }
+
+    [Parameter]
+    public string Style { get; set; } = String.Empty;
+
+    [Parameter]
+    public bool EnableDelete { get; set; } = true;
+
+    public void RemoveAttachment(Attachment a)
+    {
+        Message.Attachments.Remove(a);
+    }
+
+}

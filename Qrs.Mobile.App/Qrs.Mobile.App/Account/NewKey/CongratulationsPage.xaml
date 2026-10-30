@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             
+             x:Class="Qrs.Mobile.App.Account.NewKey.CongratulationsPage"
+               Title="Congratulations!">
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+
+            <controls:TitleView Title="Congratulations!"/>
+
+            <Label Style="{StaticResource ButtonInfo}" >
+                New Master Key has been generated and securely stored in your phone! Please confirm:
+            </Label>
+
+            <Grid Margin="40,0,20,10" RowSpacing="4" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="chkBox2" Grid.Row="0" Grid.Column="0" Visual="Default"></CheckBox>
+                <Label FontSize="17" TextColor="{StaticResource TextLight}"
+                       Text="Upgrading phone's OS, re-installing this app, or using 'Logout' button will remove my Master Key from this device and I will lose my data if I dont have the Backup Image and its Password" 
+                       Grid.Row="0" Grid.Column="1" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Label2_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <CheckBox x:Name="chkBox1" Grid.Row="1" Grid.Column="0" Visual="Default"></CheckBox>
+                <Label FontSize="17" TextColor="{StaticResource TextLight}" 
+                       Text="I have saved the Backup Image and memorized its Password" 
+                       Grid.Row="1" Grid.Column="1" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Label1_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </Grid>
+            
+
+            <Button Text="Done!"  Clicked="Continue_Clicked"></Button>
+            
+        </StackLayout>
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

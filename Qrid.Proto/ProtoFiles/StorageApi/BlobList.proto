@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.StorageApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/DataTypeEnum.proto";
+import "Qrid.Proto/ProtoFiles/StorageApi/Blob.proto";
+
+message BlobList
+{
+    repeated Blob blobs = 1;
+}
+

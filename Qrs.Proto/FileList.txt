@@ -1,0 +1,15 @@
+Qrs.Proto\ProtoFiles\AssociatedData.proto
+Qrs.Proto\ProtoFiles\AssociatedData2.proto
+Qrs.Proto\ProtoFiles\AssociatedDataDek.proto
+Qrs.Proto\ProtoFiles\AssociatedDataItem.proto
+Qrs.Proto\ProtoFiles\AssociatedDataPayload.proto
+Qrs.Proto\ProtoFiles\AssociatedDataType.proto
+Qrs.Proto\ProtoFiles\IdentityData.proto
+Qrs.Proto\ProtoFiles\QrsEnvelope.proto
+Qrs.Proto\ProtoFiles\Api\KeyOp.proto
+Qrs.Proto\ProtoFiles\Api\KeyOpRequestItem.proto
+Qrs.Proto\ProtoFiles\Api\KeyOpResponseItem.proto
+Qrs.Proto\ProtoFiles\Api\KeyOpRequest.proto
+Qrs.Proto\ProtoFiles\Api\KeyOpResponse.proto
+Qrs.Proto\ProtoFiles\Api\PairingRequest.proto
+Qrs.Proto\ProtoFiles\Api\PairingResponse.proto

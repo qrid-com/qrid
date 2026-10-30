@@ -1,0 +1,17 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+
+message TestClass 
+{
+	string user_name = 1;
+	string UserPassword = 2;
+}
+
+
+
+
+

@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0-ios</TargetFramework>
+		<SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>Qrs.Mobile.App</RootNamespace>
+		<ApplicationDisplayVersion>1.3.1</ApplicationDisplayVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseMaui>true</UseMaui>
+		<CodesignProvision>QRS PROD - App Store Distribution</CodesignProvision>
+		<ProvisioningType>manual</ProvisioningType>
+		<CodesignKey>Apple Distribution: QRID, Inc. (JGTY3GN82B)</CodesignKey>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+	  <ProvisioningType>manual</ProvisioningType>
+	  <CodesignKey>Apple Distribution: QRID, Inc. (JGTY3GN82B)</CodesignKey>
+	  <CodesignProvision>QRS PROD - App Store Distribution</CodesignProvision>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(RunConfiguration)'=='Default'">
+	  <LaunchForBackgroundFetch>false</LaunchForBackgroundFetch>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Qrs.Mobile.App\Qrs.Mobile.App.csproj" />
+	</ItemGroup>
+
+</Project>

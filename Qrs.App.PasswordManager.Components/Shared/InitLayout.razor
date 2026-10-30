@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor;
+@inherits Code.QridLayoutBase
+
+
+<MudDialogProvider FullWidth="true" MaxWidth="MaxWidth.Medium"/>
+<MudSnackbarProvider/>
+
+
+<MudLayout>
+
+    <MudAppBar Elevation="1" Fixed="false" Dense="true" >
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudText Typo="Typo.h5" Class="ml-3">Qrs Password Manager (@Code.ApplicationService.ENVIRONMENT_NAME)</MudText>
+        
+
+
+        <MudSpacer />
+
+        <MudText Color="Color.Inherit" Edge="Edge.End">@Context?.Folder?.FolderPath</MudText>
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+
+    
+
+
+    
+    <MudMainContent Style="padding-top:0px;">
+            
+        <div style="  min-height: 100%; height: calc(100vh - var(--mud-appbar-height) + var(--mud-appbar-height) / 4 );">
+            <div style=" height:100%;">
+                @Body
+            </div>
+        </div>      
+                
+    </MudMainContent>
+
+        <Popover/>
+            
+
+</MudLayout>
+
+
+
+@code {
+    bool _drawerOpen = true;
+
+
+
+
+
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"   
+             
+             x:Class="Qrs.Mobile.App.Main.ScanConfirmPage"
+               Title="Please Confirm">
+    <q:QrsScrollPage.Body>
+
+        <StackLayout>
+            <controls:TitleView x:Name="ctrTitleView" Title="Please Confirm"/>
+
+            <Label x:Name="lblMessage" Text="Loading..." HeightRequest="100" FontSize="Medium" Margin="0,0,0,20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+
+            <controls:CommandErrorsView x:Name="ctrCommandErrorsView" IsVisible="false"/>
+            <controls:CommandDataView x:Name="ctrCommandDataView"/>
+            
+            <controls:AlertsView x:Name="ctrAlertsView" IsVisible="false"/>
+
+            <Button x:Name="btnNo" Text="NO" BackgroundColor="Red" Clicked="No_Clicked"></Button>
+            <Button x:Name="btnYes" Text="YES" BackgroundColor="Green" Clicked="Yes_Clicked"></Button>
+
+            <BoxView HeightRequest="40" ></BoxView>
+
+
+        </StackLayout>
+
+
+
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

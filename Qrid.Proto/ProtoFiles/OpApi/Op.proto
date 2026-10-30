@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.OpApi";
+
+enum Op
+{
+    OP_WRAP_NEW_PAYLOAD = 0;
+    OP_WRAP_UPDATED_PAYLOAD = 1;
+    OP_UNWRAP = 2;
+    OP_RESEAL = 3;
+}
+
+
+

@@ -1,0 +1,39 @@
+﻿@page "/qrlogin"
+@using Qrs.App.PasswordManager.Components.Code
+@attribute [AllowAnonymous]
+@inject HttpClient Http
+@inject ApplicationService Appl
+
+@inject IDialogService DialogService
+
+<PageTitle>QRID Mail</PageTitle>
+
+@*
+<h1>Qrid Login Page using popup Dialog</h1>
+
+
+<MudButton @onclick="OpenDialog" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Secondary" Class="flex-grow-0" >Open Qr Login Dialog</MudButton>
+
+<MudButton @onclick="Logout" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Secondary" Class="flex-grow-0" >Logout</MudButton>
+
+<MudButton @onclick="AuthChanged" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Secondary" Class="flex-grow-0" >Auth Changed</MudButton>
+*@
+
+
+@code {
+
+    public Qrs.App.PasswordManager.Client.PwmContext Context => Appl.Context;
+
+    private async Task AuthChanged()
+    {
+        Appl.AuthStateProvider.AuthChanged();
+    }
+
+
+    
+
+    
+
+    
+
+}

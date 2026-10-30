@@ -1,0 +1,38 @@
+﻿/* ==== WINDOWS ============================================================================================== */
+
+/* works */
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj -c Release -f net10.0-windows10.0.19041.0
+
+/* works */
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj -c Release -f net10.0-windows10.0.19041.0 -p:WindowsAppSDKSelfContained=true 
+
+
+
+/* used this - works !!! */
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained true -c Release -f net10.0-windows10.0.19041.0 -p:WindowsAppSDKSelfContained=true 
+
+/* works? NO - etting this in runtime - Exception Info: System.Runtime.InteropServices.COMException (0x80040111): ClassFactory cannot supply requested class
+ */
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained true -c Release -f net10.0-windows10.0.19041.0 -p:WindowsAppSDKSelfContained=true -p:PublishSingleFile=true
+
+
+/* ==== MAC - run on the real Mac ============================================================================================== */
+
+
+https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/?view=net-maui-8.0
+publish unsigned app:
+
+run unsigned app on the Mac:
+https://support.apple.com/en-gb/guide/mac-help/mh40616/mac
+
+
+#### dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained -r maccatalyst-arm64 -f net10.0-maccatalyst -c release -p:PublishSingleFile=true -p:UseAppHost=true
+
+# works, has also produced .pkg file in /publish folder:
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained -r maccatalyst-arm64 -f net10.0-maccatalyst -c release
+
+# (used this - run on the real mac) works, need to grab the 157Mb "QrsPasswordManager" file with red icon and drop it into "Applications" folder. The "publish" folder is empty
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained -r maccatalyst-arm64 -f net10.0-maccatalyst -c release -p:CreatePackage=false  
+
+# (used this - run on the real mac) works, x64, the "QrsPasswordManager" file with red icon is much smaller at 33Mb . The "publish" folder is empty
+dotnet publish Qrs.App.PasswordManager.Hybrid.csproj --self-contained -r maccatalyst-x64 -f net10.0-maccatalyst -c release -p:CreatePackage=false  

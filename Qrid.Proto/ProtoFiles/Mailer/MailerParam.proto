@@ -1,0 +1,10 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Mailer";
+
+message MailerParam
+{
+        string key = 1;
+        string value = 2;
+}
+

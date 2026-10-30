@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Messaging";
+
+import "google/protobuf/timestamp.proto";
+
+enum CertifiedRecipientType
+{
+    CERTIFIED_RECIPIENT_TYPE_UNSPECIFIED = 0;
+    CERTIFIED_RECIPIENT_TYPE_CONTACT = 1;
+    CERTIFIED_RECIPIENT_TYPE_COMPLAIN = 2;
+}
+
+

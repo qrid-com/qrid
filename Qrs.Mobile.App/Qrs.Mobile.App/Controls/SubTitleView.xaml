@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Controls.SubTitleView"
+             x:Name="this">
+  <ContentView.Content>
+            <Label 
+              Text="{Binding Title, Source={x:Reference this}}" 
+              Margin="18,20,18,2"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              VerticalTextAlignment="Center"
+              
+                FontSize="22"
+              >
+          </Label>
+  </ContentView.Content>
+</ContentView>

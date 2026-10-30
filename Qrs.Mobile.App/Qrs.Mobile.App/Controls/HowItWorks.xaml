@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Controls.HowItWorks"
+             x:Name="this">
+  <ContentView.Content>
+        <StackLayout Spacing="0">
+
+            <controls:SubTitleView Title="Encrypt your data via QR codes"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS helps Desktop / Web / Command Line applications (Client Applications) to encrypt your data without passwords. Instead of entering passwords, use QRS app to scan QR code displayed by Client Application.
+            </Label>
+
+            <controls:SubTitleView Title="How does it work?"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS implements simple KEK + DEK envelope encryption schema. Master Key is KEK (Key Encrypting other Keys) that lives in your phone. KEK is only used to encrypt/decrypt DEKs (Data Encrypting Keys). Client Application would usually store KEK-encrypted DEK together with DEK-encrypted data. To access the data, Client Application has to send KEK-encrypted DEK to QRS app via secure end-to-end encrypted tunnel connection. Tunnel is first created by Client Application and then shared with QRS app via QR code containing ephemeral Tunnel Session Keys and Tunnel Server Url. QRS app uses KEK to decrypt DEK. Decrypted DEK is delivered back to Client Application via the same tunnel. Client Application then uses DEK to decrypt the data. Please visit QRID.COM for more details.
+            </Label>
+
+            <controls:SubTitleView Title="What is inside QR code?"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QR code contains A) Tunnel Server Url to tell QRS app where to connect to, and B) Tunnel Session Keys to establish secure E2EE connection between QRS app and Client Application.
+            </Label>
+
+            <controls:SubTitleView Title="Easier than passwords"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Scanning QR codes is easier compared to managing passwords.
+            </Label>
+
+            <controls:SubTitleView Title="More secure than passwords"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS uses randomly generated AES 256-bit KEK and DEK keys that cannot be brute-forced. Other encryption software often use keys derived from passwords that would usually have LOWER ENTROPY and can be brute-forced if password is weak. When not using a password manager, even the strongest of manually managed passwords would have MUCH LESS entropy compared to random keys used in QRS.
+            </Label>
+
+            <controls:SubTitleView Title="No risk of keyloggers"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Keyloggers may steal your passwords while being typed to unlock your password manager, etc. With QRS, keyloggers are of less concern b/c nothing is typed while unlocking (decrypting) your data.
+            </Label>
+
+            <controls:SubTitleView Title="Quantum Safe AES-256"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS uses AES encryption with 256 bit keys, which is considered to be quantum safe.
+            </Label>
+
+            <controls:SubTitleView Title="Quantum Safe Hybrid (ML-KEM + ECC)"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS uses modern Post-Quantum Cryptography (PQC) - Hybrid (ML-KEM + ECC) asymmetric encryption schema which is considered quantum safe.
+            </Label>
+            
+            <controls:SubTitleView Title="Authenticated Encryption with Associated Data (AEAD)"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS uses AES in GCM mode which provides the ability to cryptographically bind the metadata (Associated Data) describing the encrypted data. For example, Password Manager application might want to use 'website' and 'username' as Associated Data (AD) attributes. QRS uses AEAD extensively, for example, Client Application Name is a mandatory AD attribute. QRS also provides API for Client Applications to define custom AD attributes to be attached to wrapped DEK keys. Before unwrapping the DEK key, QRS application displays AD attributes to user and waits until user confirms the operation.
+            </Label>
+
+            <controls:SubTitleView Title="Cryptographic Algorithms"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Both Master Keys (KEKs) and Data Encryption Keys (DEKs) are random AES-256 keys generated in the QRS Mobile Application (MA). When wrapping DEKs with a KEK, the QRS MA uses AES-256-GCM, authenticated with associated data (AD) describing the DEK being wrapped (AD is also shown to the MA user for confirmation). For backing up Master Keys into a password-encrypted backup image, QRS uses a memory- and CPU-hardened Argon2id function as a KDF to derive the AES-256 key from the salt and backup password. For asymmetric encryption, QRS exclusively uses modern Post-Quantum Cryptography (PQC) - Hybrid (ML-KEM + ECC) asymmetric encryption schema, specifically a hybrid of ML-KEM-768 and ECDH with the NIST P-256 elliptic curve followed by AES-256-CBC authenticated with an HMAC-SHA-256. Asymmetric encryption is only used by the Tunnel Service as one of the two encryption layers when the Client Application (CA) communicates with the QRS Mobile Application (MA) via the Tunnel Service (the hash of CA’s long ephemeral hybrid public key is included in the QR code). The second layer is AES-256-GCM (the ephemeral AES key is also included in the QR code). The third layer is HTTPS/TLS provided by your OS.
+            </Label>
+
+            <controls:SubTitleView Title="Free and Open Source"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS is Free and Open Source software with a permissive MIT licence.
+            </Label>
+
+            <controls:SubTitleView Title="Cross-Platform Software"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                No more platform lock-in! QRS uses modern cross-platform C#/.NET stack and so it runs on IOS, Android, Windows, Mac OS and Linux. Switching platforms by Backing up your Master Key on Android and restoring it on IOS, or vice-versa, is super easy! 
+            </Label>
+
+            <controls:SubTitleView Title="No cloud accounts"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Having Apple, Google or Microsoft account is NOT a requirement to use QRS. The only supported way to backup your Master Key(s) is to create a Backup Image (and Password) via QRS app. This gives you 100% privacy, vendor independence, and ultimate control over your encryption keys. We also publish QRS source code so you could build QRS app from source and run it on your platform of choice.
+            </Label>
+
+            <controls:SubTitleView Title="BACKUP your Master Key NOW!"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                If you do not backup your Master Key, you will lose your encrypted data after you A) re-install QRS app, or B) upgrade your phone's Operating System, or C) use 'Logout' button at the 'Actions' screen. When any of A), B), C) happens, you will have to use 'Load Existing Master Key' button, then scan the Backup Image, then provide the Password for the backup image. Only after these steps have been successfully completed you will be able to access your encrypted data. Please go to 'Actions' page and use 'Backup Master Key' button NOW!
+            </Label>
+
+            <controls:SubTitleView Title="Nothing is stored server-side"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                There is NO risk of server-side data loss.
+            </Label>
+            
+            <controls:SubTitleView Title="Tunnel Server"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS uses intermediate Tunnel Server to establish short-living end-to-end encrypted connections (tunnels) between Client Application and QRS mobile app. This works from within different networks, behind Firewalls and NAT, assuming both QRS and Client Application are able to access the Tunnel Server via HTTPS. You could host your own Tunnel Server or by default QRS would use one of the public servers provided by QRID.COM. 
+            </Label>
+
+            <controls:SubTitleView Title="Pairing"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Pairing is the process where Client Application receives and saves a Public Key from QRS mobile app. It requires user to enter a 3-characters Pairing Code to confirm the pairing. B/c of the pairing, all user payload messages going through the Tunnel Server are DOUBLE-encrypted with 1) either of paired Public Key or ephemeral Tunnel Pub Key (its hash is in QR Code), and 2) ephemeral Tunnel Sym Key (in QR Code).
+            </Label>
+
+
+
+            <controls:SubTitleView Title="What is KEK (Master Key)?"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                KEK (Master Key) means "Key Encrypting other Keys". KEK is only used to encrypt DEKs and nothing else. KEK lives in your phone. Since KEK is randomly generated, it must be backed up!
+            </Label>
+
+            <controls:SubTitleView Title="What is DEK?"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                DEK means "Data Encrypting Key". DEK (encrypted with KEK) is stored together with the data encrypted by this DEK.
+            </Label>
+
+            
+            <controls:SubTitleView Title="What software works with QRS?"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                PLease check QRID.COM website for the list of FOSS (free and open source software) software that uses QRS encryption. Below are some examples:
+            </Label>
+
+            <controls:SubTitleView Title="Vault - File Encryption"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Encrypt arbitrary files and folders into .vault files (Linux, Windows, Mac OS, CLI)
+            </Label>
+
+            <controls:SubTitleView Title="Password Manager"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Cross-platform Password Manager (Windows, Mac OS)
+            </Label>
+
+            <controls:SubTitleView Title="Launcher"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Cross-platform Command Line utility (Linux, Windows, Mac OS) that uses encrypted YAML config to set environment variables and then launch the process. Great for loading encrypted SSH keys into SSH Agent, mounting LUKS-encrypted volume, running AWS CLI, Azure CLI, and other admin scripts that accept sensitive parameters via environment variables, without storing sensitive parameters in a plain text.
+            </Label>
+
+            <controls:SubTitleView Title="ASKPASS for SUDO, SSH, GIT"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Cross-platform command line utility to be used with SSH_ASKPASS, SUDO_ASKPASS, GIT_ASKPASS environment variables. The password is stored on the host in the encrypted file; user scans QR code (displayed by ASKPASS) with QRS mobile app; ASKPASS decrypts the password and sends it back to SSH, SUDO, GIT.
+            </Label>
+
+            <controls:SubTitleView Title="YOUR APPLICATION!"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                Use QRS client library to protect your data when developing your own application! QRS client library may be integrated into any web, mobile, desktop or command line application. Learn more at QRID.COM website!
+            </Label>
+
+            <controls:SubTitleView Title="On-Device Permissions"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                (1) Camera Access - to scan QR codes; (2) Network Access - to communicate with Client Application via Tunnel Service;
+            </Label>
+
+            <controls:SubTitleView Title="Privacy"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                QRS mobile app does not collect any PII (personally identifying information) about you. However, if you use public Tunnel Servers provided by QRID.COM, the servers will do some basic logging expected from HTTPS server. Also, it would log an Application Name and Application InstanceId which is a unique anonymous randomly generated identifier that QRS app creates and stores on your device. InsanceId is only available to QRS app and it is not available to other apps on your device. InsanceId and Application Name are included to every request that is being sent to the Tunnel Server and are readable by Tunnel Server. Public Tunnel Servers hosted by QRID.COM use these data to monitor service stability and performance, to rate-limit API requests, and to derive basic metrics used to improve the service. The InstanceId and derived metrics are stored for the period of 2 years after last use. The web server logs are stored for the period of 90 days. Complete Privacy Policy is always available at:
+            </Label>
+
+            <controls:SubTitleView Title="https://qrid.com/web/privacy"/>
+            <Label Style="{StaticResource ButtonInfo}" >
+                
+            </Label>
+
+            <controls:SubTitleView Title="QRS VERSION"/>
+            <Label Style="{StaticResource ButtonInfo}" Text="{Binding AppVersion, Source={x:Reference this}}" />
+
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+message KdfParamsArgon2
+{
+    int32 iterations = 1;               // number of iterations
+    int32 memory_power_of_2 = 2;        // memory cost, value of 16 means 2^16 Kb i.e. 64 MB of memory cost
+    int32 parallelism = 3;              // number of threads
+    bytes associated_data = 4;          // 
+}

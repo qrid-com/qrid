@@ -1,0 +1,12 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Reputation";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Proto/ProtoFiles/Reputation/CreateCocoRequestItem.proto";
+
+message CreateCocoRequest
+{
+    CertSignedBytes coco_request = 1;
+    repeated CreateCocoRequestItem items = 2;
+}

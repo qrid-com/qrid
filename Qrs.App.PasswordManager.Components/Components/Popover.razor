@@ -1,0 +1,19 @@
+﻿@inherits Code.QridComponentBase
+
+<MudPopover OverflowBehavior="OverflowBehavior.FlipNever" Open="@IsVisible" AnchorOrigin="Origin.CenterCenter" TransformOrigin="Origin.CenterCenter" Class="pa-4">
+    <div class="d-flex flex-row">
+        <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+        <MudText Typo="Typo.body2" Class="px-4 py-1">@Message</MudText>
+    </div>
+</MudPopover>
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        App.RegisterPopover(this);
+        base.OnInitialized(); // do we need this?
+    }
+
+}

@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+
+message AsymEncryptedBytesWithKeyId
+{
+    AsymEncryptedBytes asym_encrypted_bytes = 1;
+    string key_id = 2;
+}

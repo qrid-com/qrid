@@ -1,0 +1,10 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Reputation";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+
+message CheckRepTokenRequest
+{
+    CertSignedBytes coco_request_id = 1;
+}

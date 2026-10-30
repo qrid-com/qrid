@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Qrs.Mobile.App.Controls.AlertsView"
+             x:Name="this">
+  <ContentView.Content>
+    <VerticalStackLayout BindableLayout.ItemsSource="{Binding AlertItems, Source={x:Reference this}}">
+      <BindableLayout.ItemTemplate>
+        <DataTemplate>
+          <Border BackgroundColor="#FFF0F0" StrokeThickness="0" StrokeShape="RoundRectangle 6" Margin="18,4,18,30" Padding="0">
+                        <Border BackgroundColor="#FFF0F0" StrokeThickness="0" StrokeShape="RoundRectangle 5" Padding="8,8,8,8" Margin="0,0,1,2">
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Label Grid.Column="0" Text="⚠" TextColor="Red" FontSize="20" VerticalOptions="Center"/>
+                <Label Grid.Column="1" Text="{Binding .}" TextColor="Red" FontSize="15" LineBreakMode="WordWrap" VerticalOptions="Center"/>
+              </Grid>
+            </Border>
+          </Border>
+        </DataTemplate>
+      </BindableLayout.ItemTemplate>
+    </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

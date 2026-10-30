@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\Qrid.Common.Client\Qrid.Common.Client.csproj" />
+		<ProjectReference Include="..\Qrid.Common\Qrid.Common.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Qrs.Shared\Qrs.Shared.csproj" />
+	</ItemGroup>
+	
+</Project>

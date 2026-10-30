@@ -1,0 +1,128 @@
+﻿@inherits Code.QridComponentBase
+@page "/restore"
+
+
+<MudPaper Width="800px" Class="ml-16 pl-16 d-flex flex-column justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudText class=" mt-10" Typo="Typo.h4">Restore</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-column justify-start gap-2">
+        <MudText class="justify-start" Typo="Typo.body1">
+            Restore your password data from the selected backup folder. WARNING - your current data will be OVERWRITTEN by the data from the backup folder.
+        </MudText>
+        
+    </MudPaper>
+
+
+
+    <MudTable T="Code.BackupOption" Items="@BackupOptions" Hover="true" @ref="mudTable"
+              MultiSelection="false" SelectOnRowClick="true" OnRowClick="@OnRowClick"
+              Style="overflow-y: auto; " FixedHeader="false"
+              Class="flex-grow-1"
+              RowClass="cursor-pointer" Square="true" Bordered="false" Elevation="0" >
+        <HeaderContent>
+            <MudTh Style="text-align:center">X</MudTh>
+            
+            <MudTh>Select one Backup Folder to restore from:</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="x">
+                <MudCheckBox T="bool" Checked="@context.IsSelected" Disabled="true"  Size="Size.Small" Color="Color.Primary"></MudCheckBox>
+            </MudTd>
+            
+            <MudTd DataLabel="xxxx">@context.BackupFolder</MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>Cannot find any backup folders available</MudText>
+        </NoRecordsContent>
+    </MudTable>
+
+
+
+
+
+    
+
+
+
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-start gap-8">
+        <MudButton @onclick=RestoreClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Save"
+                   Color="Color.Secondary">
+            <MudText>Restore</MudText>
+        </MudButton>
+
+        <MudButton @onclick=CancelClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Cancel"
+                   Color="Color.Default">
+            <MudText>Cancel</MudText>
+        </MudButton>
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+    private MudTable<Code.BackupOption> mudTable;
+    private List<Code.BackupOption> BackupOptions { get; set; }
+    private HashSet<Code.BackupOption> selectedItems = new HashSet<Code.BackupOption>();
+
+    public async Task RestoreClick()
+    {
+        // Restore
+
+        var selected = BackupOptions.Where(bo => bo.IsSelected).ToList();
+
+        if (selected.Count == 0)
+        {
+            await App.ShowErrorAsync("Please select 1 folder to restore from");
+            return;
+        }
+
+        if (selected.Count > 1)
+        {
+            await App.ShowErrorAsync("Selected more than 1 folder! Please select exactly 1 folder to restore from");
+            return;
+        }
+
+        // RESTORE - copy files
+        var restoreResult = App.PerformRestore(selected[0].BackupFolder);
+
+        if (!string.IsNullOrWhiteSpace(restoreResult))
+        {
+            await App.ShowErrorAsync($"ERROR - Restore Failed!!! Please try restoring from another folder. Error Message: {restoreResult}");
+            // TODO - need to reload data here as well b/c UI still shows the old data at the moment
+            return;
+        }
+
+        await App.ShowMessageBoxAsync("SUCCESS", new MarkupString("Successfully restored your data from the backup. Will now RELOAD newly restored data - please get ready to SCAN QR CODE to open the folder, etc"));
+
+        // RELOAD 
+        await App.PerformReloadAsync(App.Settings.DataPath);
+
+        // NAVIGATE to Main Page
+        App.NavigateToInbox();
+    }
+
+    public async Task CancelClick()
+    {
+        App.NavigateToInbox();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        BackupOptions = App.GetRestoreOptions();
+
+    }
+
+    void OnRowClick(TableRowClickEventArgs<Code.BackupOption> args)
+    {
+        // allow only 1 option selected aka radio button behavior
+        BackupOptions.ForEach(bo => bo.IsSelected = false);
+        args.Item.IsSelected = true;
+    }
+
+}

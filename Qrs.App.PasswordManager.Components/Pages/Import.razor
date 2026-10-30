@@ -1,0 +1,75 @@
+﻿@inherits Code.QridComponentBase
+@page "/import"
+@using Qrid.Common.Crypto
+
+
+<MudPaper Width="800px" Class="ml-16 pl-16 d-flex flex-column justify-start flex-grow-1 gap-4" Elevation="0">
+    <MudText class=" mt-10" Typo="Typo.h4">Import from File</MudText>
+    <MudPaper Elevation="0" Class="mt-2 mb-8 d-flex flex-column justify-start gap-2">
+        <MudText class="justify-start" Typo="Typo.body1">
+            Import function OVERWRITES your current data with the data from the export file.
+            Delete .export file right after the data move has been completed and verified.
+        </MudText>
+        
+    </MudPaper>
+
+    <MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+        <MudTextField ReadOnly=false Label="Export File" @bind-Text="@ExportFile" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+    </MudPaper>
+    <MudPaper Width="100%" MaxHeight="48px" Class="d-flex flex-row align-baseline gap-1 mb-1" Elevation="0">
+        <MudTextField ReadOnly=false Label="File Password" @bind-Text="@ExportPassword" T="string" Variant="Variant.Outlined" Margin="Margin.Dense"></MudTextField>
+    </MudPaper>
+    
+    <MudPaper Elevation="0" Class="mt-4 mb-6 d-flex flex-row justify-start gap-8">
+        <MudButton @onclick=ImportClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.FileDownload"
+                   Color="Color.Secondary">
+            <MudText>Import</MudText>
+        </MudButton>
+
+        <MudButton @onclick=CancelClick
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Cancel"
+                   Color="Color.Default">
+            <MudText>Cancel</MudText>
+        </MudButton>
+    </MudPaper>
+
+    
+
+
+</MudPaper>
+
+@code {
+
+
+    public string ExportFile { get; set; }
+    public string ExportPassword { get; set; }
+
+    public async Task ImportClick()
+    {
+
+        var response = await App.Context.ImportFolder(ExportFile, ExportPassword, App.AppRootPath);
+        if (response.IsError())
+            await App.ShowMessageBoxAsync("Error", response.Message);
+        else
+            // TODO - make sure that special characters in password are not getting altered b/c of html while being displayed:
+            await App.ShowMessageBoxAsync("Success", response.Message);
+
+        //App.NavigateToInbox();
+    }
+
+    public async Task CancelClick()
+    {
+        App.NavigateToInbox();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
+    
+
+}

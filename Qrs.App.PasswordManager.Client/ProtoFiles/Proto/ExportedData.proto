@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.App.PasswordManager.Client.Proto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrs.App.PasswordManager.Client/ProtoFiles/Proto/ExportedResource.proto";
+
+message ExportedData
+{
+    repeated ExportedResource resources = 1;
+}
+
+
+

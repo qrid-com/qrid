@@ -1,0 +1,13 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto";
+
+enum AssociatedDataType
+{
+    ASSOCIATED_DATA_TYPE_UNSPECIFIED = 0;
+    ASSOCIATED_DATA_TYPE_DEK = 1;
+    ASSOCIATED_DATA_TYPE_PAYLOAD = 2;
+}
+
+
+

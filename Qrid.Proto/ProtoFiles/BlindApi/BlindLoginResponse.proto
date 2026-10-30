@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.BlindApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/DataTypeEnum.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertifiedSig.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKeyPair.proto";
+import "Qrid.Proto/ProtoFiles/Data/UserInfo.proto";
+import "Qrid.Common.Proto/ProtoFiles/TypedData.proto";
+
+message BlindLoginResponse
+{
+    CertifiedSig signed_session_key = 1;
+    UserInfo user_info = 2;
+    CryptoKey blue_key_root = 3;
+    string blue_key_root_id = 4;
+    Certificate key_api_access_cert = 5;
+    CryptoKeyPair key_api_access_key_pair = 6;
+    TypedData message_read = 7;
+    TypedData message_sign = 8;
+    CryptoKey contact_master_key = 9;
+    CryptoKey contact_hmac_key = 10;
+    TypedData reputation_token_request = 11;
+}
+

@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrs.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+message IdentityData
+{
+    bytes dek_id = 1;
+    string app_name = 2;
+    int32 top_level_key = 3;
+    google.protobuf.Timestamp created = 4;
+    
+}
+
+
+

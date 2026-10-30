@@ -1,0 +1,35 @@
+﻿@namespace MudExtensions
+@inherits MudComponentBase
+
+<div class="@Classname" style="@Style">
+    <MudSlider @ref="_slider" Value="@Dimension" ValueChanged="@UpdateDimension" ondblclick="@OnDoubleClick"
+               T="double" Min="0" Max="100" Step="@Sensitivity" Disabled="@(!EnableSlide)"
+               Class="@SliderClassname" Style="overflow: hidden; z-index: 6" />
+
+    <div class="@ContentClassname" style="@EffectiveStartStyle">
+        @StartContent
+    </div>
+    <div class="@ContentClassname" style="@EffectiveEndStyle">
+        @EndContent
+    </div>
+</div>
+
+<style>
+    @($".mud-splitter-generate-{_styleGuid} {{ grid-template-columns: {Dimension.ToInvariantString()}% {(100 - Dimension).ToInvariantString()}%; }}")
+
+    .mud-splitter-thumb-@(_styleGuid) ::-webkit-slider-thumb {
+        @EffectiveColor
+        @EffectiveHeight
+        @EffectiveBarStyle
+    }
+
+    .mud-splitter-thumb-@_styleGuid ::-moz-range-thumb {
+        @EffectiveColor
+        @EffectiveHeight
+        @EffectiveBarStyle
+    }
+
+    .mud-splitter-content-@_styleGuid {
+        @EffectiveHeight
+    }
+</style>

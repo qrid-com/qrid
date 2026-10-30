@@ -1,0 +1,36 @@
+
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+             xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"              
+             x:Class="Qrs.App.Vault.Avalonia.Controls.ExtractedPanel">
+    <StackPanel Orientation="Vertical">
+
+        <controls:PanelHeader Title="Content Extracted To:" />
+
+        
+        
+
+            <TextBox x:Name="contextFolderTextInput" HorizontalAlignment="Stretch" TextAlignment="Center" Text="C:\users\alex\data\Passport_Scan.vault" IsReadOnly="True" />
+
+
+
+
+		<Border Height="15"/>
+
+        <Button Content="View Content" Click="Button_Open_Content_Folder_Clicked"></Button>
+        <Label Classes="ButtonInfo" >
+            Opens content folder to view or edit content files.
+        </Label>
+
+        <Button Content="Save Content back into Vault" Click="Button_Save_Into_Vault_Clicked"></Button>
+        <Label Classes="ButtonInfo" >
+            Saves all files from content folder back into encrypted vault file.
+        </Label>
+
+
+    </StackPanel>
+</q:QrsViewBase>

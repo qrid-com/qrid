@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Mailer";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Proto/ProtoFiles/Mailer/MailerParam.proto";
+
+message MailerRequest
+{
+        string email = 1;
+        string template_name = 2;
+        repeated MailerParam params = 3;
+}
+

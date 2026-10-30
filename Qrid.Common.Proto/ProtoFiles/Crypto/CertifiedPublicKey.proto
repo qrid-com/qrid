@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.Crypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+
+message CertifiedPublicKey
+{
+    CryptoKey public_key = 1; 
+    google.protobuf.Timestamp not_before = 2; 
+    google.protobuf.Timestamp not_after = 3;
+    string subject_name = 4;
+    string subject_type = 5;
+    string key_role = 6;
+    string id = 7;
+}

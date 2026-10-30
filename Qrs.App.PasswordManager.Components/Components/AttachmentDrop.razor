@@ -1,0 +1,109 @@
+﻿@inject ISnackbar Snackbar
+@using Qrs.App.PasswordManager.Client.Models;
+@inherits Code.QridComponentBase
+
+@*<MudPaper Style=" display: flex; flex-direction: column; height:100%; width:100%; flex: 1;">
+    @ondrag="Drag"
+    @ondragover="DragOver"
+
+    @ondragover:stopPropagation="true"
+                @ondragstart="@DragStart"
+                @ondragenter="@DragEnter"
+                @ondragleave="@DragLeave"
+                @ondragend="@DragEnd"
+
+
+*@
+    <MudFileUpload T="IReadOnlyList<IBrowserFile>" 
+        OnFilesChanged="OnInputFileChanged"
+               Hidden="false" 
+               Class="qrid-file-drop d-flex flex-grow-1"
+               InputClass="MudFileUpload-InputClass absolute mud-width-full mud-height-full overflow-hidden z-20"
+               InputStyle="opacity:0;"
+                
+               >
+
+        <ButtonTemplate>
+        <div id="dropFiles" class="@DragClass" style="height:100%; flex-wrap: wrap; opacity:0.5; @($" background:{Palette.Background};")">
+                <MudText Class="" Color="Color.Surface" Typo="Typo.h2">Drop files here</MudText>
+            </div>
+        </ButtonTemplate>
+
+    </MudFileUpload>
+@*</MudPaper>*@
+
+@code {
+
+    [Parameter]
+    public ResourceInfo Message { get; set; }
+
+    [Parameter]
+    public EventCallback OnNewFile { get; set; }
+
+    [Parameter]
+    public EventCallback OnDragEnd { get; set; }
+
+    private static string DefaultDragClass = "d-flex flex-grow-1 justify-center align-content-center rounded-lg border-4 border-dashed pa-4 ma-4 mud-height-full z-10";
+    private string DragClass = DefaultDragClass;
+
+    private async Task OnInputFileChanged(InputFileChangeEventArgs e)
+    {
+        App.ShowProcessing();
+        ClearDragClass();
+        var files = e.GetMultipleFiles();
+        foreach (var file in files)
+        {
+            var a = await App.GetAttachmentAsync(file);
+            Message.Attachments.Add(a);
+        }
+
+        // notify parent control about new file
+        await OnNewFile.InvokeAsync();
+        // make parent control hide Drop Area (hide us)
+        await OnDragEnd.InvokeAsync();
+
+        App.HideProcessing();
+    }
+
+    private void SetDragClass()
+    {
+        DragClass = $"{DefaultDragClass}"; // + " mud-border-primary"
+    }
+
+    private void ClearDragClass()
+    {
+        DragClass = DefaultDragClass;
+    }
+
+    private void DragStart(DragEventArgs e)
+    {
+        LogInfo("ddddddddddddddddddd DragStart");
+    }
+    
+    private void DragEnter(DragEventArgs e)
+    {
+        LogInfo("ddddddddddddddddddd DragEnter");
+        SetDragClass();
+    }
+
+    private async Task DragLeave(DragEventArgs e)
+    {
+        LogInfo("ddddddddddddddddddd DragLeave");
+        ClearDragClass();
+        // make parent control hide Drop Area (hide us)
+        await OnDragEnd.InvokeAsync();
+    }
+    
+    private async Task DragEnd(DragEventArgs e)
+    {
+        LogInfo("ddddddddddddddddddd DragEnd");
+        ClearDragClass();
+        // make parent control hide Drop Area (hide us)
+        await OnDragEnd.InvokeAsync();
+    }
+    
+    private void DragOver(DragEventArgs e)
+    {
+        //LogInfo("ddddddddddddddddddd DragOver");
+    }
+}

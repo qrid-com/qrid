@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Envelope1";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertifiedSig.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+
+import "Qrid.Proto/ProtoFiles/Envelope1/EncryptedKek.proto";
+import "Qrid.Proto/ProtoFiles/Envelope1/AccessControl.proto";
+
+message QridEnvelope
+{
+	bytes identity_data_bytes = 1;
+	bytes associated_data_bytes = 2;
+	CertifiedSig identity_cert_sig = 3;
+	
+	repeated EncryptedKek payload_keks = 4;
+	SymEncryptedBytes payload_dek = 5;
+	CertSignedBytes payload = 6;
+	
+	AccessControl access_control = 7;
+}
+
+
+

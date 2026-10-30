@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.OpApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+import "Qrid.Proto/ProtoFiles/OpApi/OpRequestItem.proto";
+
+message OpRequest
+{
+    string app_name = 1;
+    string attempted_username = 2;
+    bool login_request = 3;
+    repeated OpRequestItem items = 4;
+}
+
+
+

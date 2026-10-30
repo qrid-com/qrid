@@ -1,0 +1,12 @@
+syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Reputation";
+
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+
+message CocoResponseItem
+{
+    string contact_id = 1;
+    CertSignedBytes certified_contact_recipient = 2;
+    CertSignedBytes certified_complain_recipient = 3;
+}

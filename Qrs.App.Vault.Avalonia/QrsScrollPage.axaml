@@ -1,0 +1,35 @@
+
+<q:QrsPageBase xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+               xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"                
+               x:Class="Qrs.App.Vault.Avalonia.QrsScrollPage"
+               >
+
+    <!-- Padding="20" Spacing="20" -->
+
+
+    <Grid x:Name="RootGrid">
+        <StackPanel Margin="0">
+        
+            <ScrollViewer VerticalAlignment="Stretch">
+                <StackPanel MinHeight="800" x:Name="BodyView" />
+            </ScrollViewer>
+
+
+
+            <StackPanel x:Name="FooterView" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsVisible="True" Height="30">
+                <TextBlock x:Name="lblStatus" TextAlignment="Center" Text=""></TextBlock>
+            </StackPanel>
+
+        </StackPanel>
+
+        
+
+
+    </Grid>
+
+</q:QrsPageBase>

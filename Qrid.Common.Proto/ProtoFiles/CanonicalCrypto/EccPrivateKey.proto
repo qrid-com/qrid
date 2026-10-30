@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message EccPrivateKey
+{
+    bytes d = 1;              // in ECC, priv key is an integer in the interval [1, n − 1] (n is one of the static Curve parameters) 
+    EccCurve ecc_curve = 2;   // EccCurve 
+}

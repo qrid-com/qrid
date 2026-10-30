@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Account.CreateBackup.BackupImagePage"
+               Title="Backup Image" 
+                 BackgroundColor="White">
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+            <Label 
+              Text="Save This Image!!!" 
+              Margin="18,30,18,2"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              VerticalTextAlignment="Center"
+              HeightRequest="60"
+              FontSize="Title"
+                TextColor="Black">
+            </Label>
+
+            <Label Style="{StaticResource ButtonInfo}" Margin="1,0,1,25" >
+                This is a password-encrypted BACKUP of your Master Key which will be required to LOAD your Master Key on another phone or after re-installing this app. Master Key Name:
+            </Label>
+
+            <Label Text="KeyName"
+                   x:Name="KeyName"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,0,0,10"
+                   FontSize="20"
+                   TextColor="Black"
+                   />
+            <ContentView WidthRequest="250" HeightRequest="250">
+                <Image x:Name="BackupQrCodeImage" IsVisible="True"
+                       MinimumHeightRequest="250"
+                       MinimumWidthRequest="250"
+                       MaximumHeightRequest="250"
+                       MaximumWidthRequest="250"
+                       HeightRequest="250" WidthRequest="250" />
+            </ContentView>
+            <BoxView HeightRequest="20" ></BoxView>
+            <Button BorderWidth="2" BorderColor="Black" BackgroundColor="White" TextColor="Black" Text="I have saved this image" Clicked="Continue_Clicked" VerticalOptions="EndAndExpand"></Button>
+            <BoxView HeightRequest="2" ></BoxView>
+        </StackLayout>
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>

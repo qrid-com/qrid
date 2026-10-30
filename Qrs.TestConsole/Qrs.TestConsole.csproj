@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Qrs.App.PasswordManager.Client\Qrs.App.PasswordManager.Client.csproj" />
+    <ProjectReference Include="..\Qrs.App.Vault.Client\Qrs.App.Vault.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Client\Qrs.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Mobile.Client\Qrs.Mobile.Client.csproj" />
+    <ProjectReference Include="..\Qrs.Tunnel.Client\Qrs.Tunnel.Client.csproj" />
+  </ItemGroup>
+
+</Project>

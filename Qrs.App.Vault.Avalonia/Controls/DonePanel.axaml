@@ -1,0 +1,40 @@
+
+<q:QrsViewBase xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:q="clr-namespace:Qrs.App.Vault.Avalonia;assembly=Qrs.App.Vault.Avalonia"
+               xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                mc:Ignorable="d" 
+               x:Class="Qrs.App.Vault.Avalonia.Controls.DonePanel">
+    <StackPanel Orientation="Vertical">
+
+        <controls:PanelHeader x:Name="titleHeader" Title="" />
+
+		<TextBlock x:Name="messageLabel"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextAlignment="Center"
+				   TextWrapping="Wrap"
+				   FontSize="20"
+				   Margin="1,0,1,30">
+			<TextBlock.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Copy Path" Click="OnCopyClicked" />
+					<MenuItem Header="Open Path" Click="OnOpenClicked" />
+				</ContextMenu>
+			</TextBlock.ContextMenu>
+        </TextBlock>
+
+        <Button x:Name="buttonDone" Content="OK" Click="Button_Done_Clicked"></Button>
+        <Label x:Name="labelDone" Classes="ButtonInfo" >
+            Go to main screen
+        </Label>
+
+        <Button x:Name="buttonExit" Content="Exit" Click="Button_Exit_Clicked"></Button>
+        <Label x:Name="labelExit" Classes="ButtonInfo" >
+            Exit the application
+        </Label>
+
+    </StackPanel>
+</q:QrsViewBase>

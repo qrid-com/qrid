@@ -1,0 +1,65 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:controls="clr-namespace:Qrs.App.Vault.Avalonia.Controls"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Qrs.App.Vault.Avalonia.MainWindow"
+        Title="Qrs.App.Vault.Avalonia" 
+		Loaded="HomePage_Loaded"
+		Width="500" Height="700"
+		>
+	
+	<DockPanel x:Name="TopDockPanel" LastChildFill="True">
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="Create _New Vault" Click="Menu_New_Vault_Clicked"/>
+				<MenuItem Header="New _In-Memory Vault" Click="Menu_New_InMemory_Vault_Clicked"/>
+				<MenuItem Header="_Extract from Vault" Click="Menu_Extract_Vault_Clicked"/>
+				<MenuItem Header="_Open Vault" Click="Menu_Open_Vault_Clicked"/>
+				<MenuItem Header="Open _Recent" x:Name="OpenRecentMenuItem" SubmenuOpened="Menu_OpenRecent_SubmenuOpened">
+					<MenuItem Header="(no recent files)" IsEnabled="False"/>
+				</MenuItem>
+				<MenuItem Header="_Add New File" Click="Menu_Add_File_Clicked"/>
+				<MenuItem Header="_Edit Selected File" Click="Menu_Edit_File_Clicked"/>
+				<MenuItem Header="Ex_port Selected Files" Click="Menu_Export_Files_Clicked"/>
+				<MenuItem Header="_Save Content into Vault" Click="Menu_Close_Vault_Clicked"/>
+				<MenuItem Header="Go to _Main Screen" Click="Menu_Goto_Main_Clicked"/>
+				<MenuItem Header="Test" Click="Menu_Test_Clicked"/>
+				<MenuItem Header="_Exit" Click="Menu_Exit_Clicked"/>
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About" Click="Menu_Help_About_Clicked"/>
+			</MenuItem>
+		</Menu>
+
+		<StackPanel DockPanel.Dock="Bottom">
+			<TextBlock x:Name="StatusTextBlock" HorizontalAlignment="Center" Margin="5,5"/>
+		</StackPanel>
+
+	
+		<Grid Margin="20,0" RowDefinitions="*">
+
+			<controls:HomePanel Grid.Row="0" x:Name="homePanel"/>
+
+			<controls:QrPanel Grid.Row="0" x:Name="qrPanel" IsVisible="False"/>
+
+			<controls:NewVaultPanel Grid.Row="0" x:Name="newVaultPanel" IsVisible="False" VerticalAlignment="Stretch"/>
+
+			<controls:VaultPanel Grid.Row="0" x:Name="vaultPanel" IsVisible="False"/>
+
+			<controls:ExtractedPanel Grid.Row="0" x:Name="extractedPanel" IsVisible="False"/>
+
+			<controls:DonePanel Grid.Row="0" x:Name="donePanel" IsVisible="False"/>
+
+			<controls:ProcessingPanel Grid.Row="0" x:Name="processingPanel" IsVisible="False" VerticalAlignment="Stretch"/>
+
+		</Grid>
+	
+
+
+
+
+	</DockPanel>
+	
+</Window>

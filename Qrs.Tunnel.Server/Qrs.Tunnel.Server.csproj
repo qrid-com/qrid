@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+	  <Version>1.0.0</Version>
+	  <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>0e03e93b-626b-421a-a9b2-97aa493d522c</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <!-- Native AOT: the tunnel server is a Minimal API app (see Program.cs) using
+         source-generated JSON (TunnelJsonContext), so it is AOT-compatible and is
+         published with Native AOT by Dockerfile.gcr (-p:PublishAot=true) for the
+         fastest cold start. IsAotCompatible enables the trim/AOT analyzers during
+         a regular `dotnet build`/`dotnet publish` (so incompatibilities surface
+         early) WITHOUT forcing every publish to produce a native binary - the
+         standard Dockerfile and QRIDHL.sln still do a normal framework-dependent
+         build. Full Native AOT is opted into explicitly via -p:PublishAot=true. -->
+    <IsAotCompatible>true</IsAotCompatible>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_WebToolingArtifacts Remove="Properties\PublishProfiles\Delllaptop.pubxml" />
+  </ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Serilog" Version="4.4.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="Serilog.Sinks.Http" Version="9.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Qrid.Common.Server\Qrid.Common.Server.csproj" />
+		<ProjectReference Include="..\Qrid.Common\Qrid.Common.csproj" />
+		<ProjectReference Include="..\Qrs.Tunnel.Shared\Qrs.Tunnel.Shared.csproj" />
+	</ItemGroup>
+
+
+	<Target Name="GenerateVersionInfo" BeforeTargets="CoreCompile">
+		<PropertyGroup>
+			<!-- Get the current UTC time formatted as an ISO 8601 string -->
+			<_CurrentUtcTime>$([System.DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ"))</_CurrentUtcTime>
+
+			<!-- Construct the C# class file layout -->
+			<VersionCode>
+				namespace Qrs.Tunnel.Server%3B
+
+				public static class BuildInfo
+				{
+				public const string BuildVersion = "$(Version)"%3B
+				public const string BuildTime = "$(_CurrentUtcTime)"%3B
+				}
+			</VersionCode>
+		</PropertyGroup>
+
+		<!-- Write the code out to the intermediate folder -->
+		<WriteLinesToFile File="$(IntermediateOutputPath)BuildInfo.g.cs"
+						  Lines="$(VersionCode)"
+						  Overwrite="true"
+						  WriteOnlyWhenDifferent="true" />
+
+		<!-- Include the generated file into your project compilation -->
+		<ItemGroup>
+			<Compile Include="$(IntermediateOutputPath)BuildInfo.g.cs" />
+		</ItemGroup>
+	</Target>
+	
+	
+</Project>

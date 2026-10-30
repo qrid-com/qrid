@@ -1,0 +1,14 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Api";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/DataTypeEnum.proto";
+
+message CommandRequest
+{
+    string service_name = 1;
+    string command_name = 2;
+    string command_json = 3;
+}
+

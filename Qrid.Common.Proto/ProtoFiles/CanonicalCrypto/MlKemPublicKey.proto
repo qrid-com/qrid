@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/Enums.proto";
+
+message MlKemPublicKey
+{
+    // ML KEM Public Key contains the following elements:
+    // "t" - encoding of the polynomial vector: t = A*s + e (mod q) ; Size is one of 384/576/768 bytes
+    // "rho" - seed for generating public matrix A
+
+    // but we would just store it all here as bytes b/c there seems to be established standard encoding/decoding to/from bytes, 
+    // and so far it looks like we do NOT need to deal with individual pieces, at least not in this c# implementation using Bouncy Castle
+
+    bytes PublicBytes = 1;   // encoded into bytes using Bouncy Castle API
+}

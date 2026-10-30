@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto.CanonicalCrypto";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoKey.proto";
+
+message HybridEcP256Mlkem768Sha256Aes256CbcSha256Bytes
+{
+    bytes derivation = 1;
+    bytes associated_data = 2;
+    CryptoKey sender_ec_public_key = 3;
+    bytes ml_kem_encapsulation = 4;
+    bytes bytes = 5;
+}

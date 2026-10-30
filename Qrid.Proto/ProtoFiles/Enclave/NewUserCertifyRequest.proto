@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Enclave";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertificateSigningRequest.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/DerivationParams.proto";
+
+message NewUserCertifyRequest
+{
+        string username = 1;
+        string email = 2;
+        bytes username_password_hash_hash = 3;
+        DerivationParams password_params = 4;
+        AsymEncryptedBytes encrypted_user_data = 5;
+        CertificateSigningRequest account_certificate_csr = 6;
+
+}
+

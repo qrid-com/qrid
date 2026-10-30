@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Common.Proto";
+
+import "google/protobuf/timestamp.proto";
+
+message TypedMessage
+{
+    string message_type = 1;
+    bytes message_bytes = 2;
+}
+

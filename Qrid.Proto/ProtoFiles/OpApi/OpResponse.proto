@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.OpApi";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Proto/ProtoFiles/OpApi/OpResponseItem.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertifiedKeyPair.proto";
+
+import "Qrid.Proto/ProtoFiles/BlindApi/BlindLoginResponse.proto";
+
+message OpResponse
+{
+    repeated OpResponseItem items = 1;
+    CertifiedKeyPair payload_sign_ckp = 2;
+    BlindLoginResponse login_response = 3;
+}
+
+
+

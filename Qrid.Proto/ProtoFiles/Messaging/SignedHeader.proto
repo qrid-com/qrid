@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Messaging";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertSignedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/SymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/AsymEncryptedBytes.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CryptoHash.proto";
+import "Qrid.Proto/ProtoFiles/Messaging/CertifiedRecipientToken.proto";
+
+message SignedHeader
+{
+    string app_name = 1; 
+    string receiver = 2;
+    CryptoHash hash_of_encrypted_body = 3;
+    AsymEncryptedBytes header_ew_receiver_pub = 4;
+    CertifiedRecipientToken contact_token = 5;
+    string home_contact_id = 6;
+    string remote_contact_id = 7;
+}
+
+
+

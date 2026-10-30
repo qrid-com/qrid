@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"
+             x:Class="Qrs.Mobile.App.Controls.PopupLoadingControl"
+             x:Name="this"
+             BackgroundColor="#A0808080" Padding="0, 0" IsVisible="false" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All"
+             >
+  <ContentView.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+            <Frame CornerRadius="5" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Start"
+                       HasShadow="False" 
+                       IsClippedToBounds="True"
+                       Padding="0">
+                <StackLayout Orientation="Vertical" HeightRequest="150" WidthRequest="200" BackgroundColor="White">
+                    <ActivityIndicator Margin="0,60,0,0" VerticalOptions="Center" HorizontalOptions="Center" Color="Black" WidthRequest="30" HeightRequest="30" Scale="2" IsRunning="True" ></ActivityIndicator>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

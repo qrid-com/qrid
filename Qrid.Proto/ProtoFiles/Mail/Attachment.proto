@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Mail";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Proto/ProtoFiles/Mail/AttachmentHeader.proto";
+import "Qrid.Proto/ProtoFiles/Mail/AttachmentBody.proto";
+
+message Attachment
+{
+    AttachmentHeader header = 1; 
+    AttachmentBody body = 2;
+}
+
+
+

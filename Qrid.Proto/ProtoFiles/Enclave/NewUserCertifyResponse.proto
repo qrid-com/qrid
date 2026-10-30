@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+package qridproto;
+option csharp_namespace = "Qrid.Proto.Enclave";
+
+import "google/protobuf/timestamp.proto";
+import "Qrid.Common.Proto/ProtoFiles/Crypto/CertifiedSig.proto";
+import "Qrid.Proto/ProtoFiles/Enclave/EnclaveStatus.proto";
+
+message NewUserCertifyResponse
+{
+        EnclaveStatus enclave_status = 1;        
+        int32 error_code = 2;
+        Certificate account_certificate = 3;
+}
+

@@ -1,0 +1,248 @@
+﻿@using Qrs.App.PasswordManager.Client.Models;
+@inherits Code.QridComponent<MainScreenView>
+
+<div class="pb-0" style="flex: 1 1 auto; height:100%; overflow: hidden; ">
+<MudPaper Elevation="0" Height="100%" Class="d-flex flex-column">
+
+    <!-- UI for Filter and Sort -->
+        @*<div>Render Time: @DateTime.Now.Ticks</div>*@
+    <div class="d-flex gap-2 mb-4">
+        
+
+            <MudTextField T="string" 
+                          Class="flex-grow-1 ml-4 mt-4 mb-2"
+                          DebounceInterval="300"
+                          Immediate="true"
+                          Clearable="true"
+                          OnClearButtonClick="SearchCancelClick"
+                          ValueChanged="SearchClick"
+                          Variant="Variant.Outlined"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          Adornment="Adornment.Start"
+                          @bind-Text="@App.Context.Folder.Searched.Criteria.Keywords"
+                          Margin="Margin.Dense" />
+
+
+
+
+            <div class="flex-grow-0 d-flex flex-row justify-start mr-8 ml-2 mt-4 mb-2" style="">
+
+                <MudMenu Style="" Class="flex-grow-1 d-flex justify-start" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" Dense="true">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Text" Size="Size.Small" StartIcon="@App.GetSortIcon(App.Context.Folder.Searched.Criteria.SortBy)">@App.GetSortText(App.Context.Folder.Searched.Criteria.SortBy)</MudButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowDownward" OnClick="() => SortByClick(SortBy.CreatedAsc)">@App.GetSortText(SortBy.CreatedAsc)</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowUpward" OnClick="() => SortByClick(SortBy.CreatedDesc)">@App.GetSortText(SortBy.CreatedDesc)</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowDownward" OnClick="() => SortByClick(SortBy.NameAsc)">@App.GetSortText(SortBy.NameAsc)</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowUpward" OnClick="() => SortByClick(SortBy.NameDesc)">@App.GetSortText(SortBy.NameDesc)</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowDownward" OnClick="() => SortByClick(SortBy.TypeAsc)">@App.GetSortText(SortBy.TypeAsc)</MudMenuItem>
+                        <MudMenuItem Icon="@Icons.Material.Filled.ArrowUpward" OnClick="() => SortByClick(SortBy.TypeDesc)">@App.GetSortText(SortBy.TypeDesc)</MudMenuItem>
+                    </ChildContent>
+                </MudMenu>
+
+
+            </div>
+
+    </div>
+
+
+    <!-- UI for MAIN LIST -->
+
+    <style>
+        .selected {
+            background-color: #1E88E5 !important;
+        }
+
+        .selected > td {
+            color: white !important;
+        }
+
+        .selected > td .mud-input {
+            color: white !important;
+        }
+    </style>
+
+    @*
+    <MudPaper Class="ma-4" Elevation="0">
+            <div>selectedRowNumber=@selectedRowNumber</div>
+            <div>SelectedItemResourceName=@SelectedItemResourceName</div>
+            <MudButton Variant=Variant.Text OnClick="@((e) => this.StateChanged())">State Changed</MudButton>
+    </MudPaper>
+    *@
+
+    <MudTable T="SearchedItem" Items="@App.Context.Folder.Searched.Items" Hover="true" @ref="mudTable"
+                  Style="overflow-y: auto; overflow-x: hidden; " 
+                  FixedHeader="true" FixedFooter="true" Height="100%"
+                  Class="flex-grow-1"
+                RowClass="cursor-pointer" Square="true" Bordered="false" RowClassFunc="@SelectedRowClassFunc" OnRowClick="RowClickEvent" >
+        <HeaderContent>
+                <MudTh>&nbsp;</MudTh>
+                <MudTh>Type</MudTh>
+                <MudTh nowrap>Website / Resource</MudTh>
+                <MudTh>Username</MudTh>
+                <MudTh>Notes</MudTh>
+                <MudTh>Created</MudTh>
+        </HeaderContent>
+        <RowTemplate >
+                <MudTd >.</MudTd>
+                <MudTd >@context.ResourceItem.ResourceInfo.Type</MudTd>
+                <MudTd >@context.ResourceItem.ResourceInfo.Name</MudTd>
+                <MudTd >@context.ResourceItem.ResourceInfo.Username</MudTd>
+                <MudTd >@context.ResourceItem.ResourceInfo.Notes</MudTd>
+                <MudTd >@context.ResourceItem.ResourceInfo.CreatedString</MudTd>
+        </RowTemplate>
+        <FooterContent>
+                <MudTd colspan="1">
+                    <MudPaper Elevation="0" Class="border-none mud-border-lines-default" Width="100%" Style="border-top-width: 1px!important;  ">
+                        &nbsp;
+                    </MudPaper>
+                </MudTd>
+                <MudTd colspan="5">
+                    <MudPaper Elevation="0" Class="border-none mud-border-lines-default pl-0 pt-2 pb-2 " Width="100%" Style="border-top-width: 1px!important;  ">
+                        <MudText Style="font-weight: bold" Color="Color.Default">@RecordCountString</MudText>
+                    </MudPaper>
+                </MudTd>
+        </FooterContent>
+    </MudTable>
+
+    
+
+
+
+</MudPaper>
+
+</div>
+
+@code {
+
+    public string RecordCountString => App.Context.Folder.Searched.Items.Count == 1 ? "1 item" : $"{App.Context.Folder.Searched.Items.Count} items";
+
+    public string SelectedItemResourceName
+    {
+        get
+        {
+            var si = (SearchedItem)mudTable?.SelectedItem;
+            if (si == null) return "SelectedItem is null";
+            return si.ResourceItem?.ResourceInfo?.ResourceData?.ResourceName ?? "null";
+        }
+    }
+
+    public void SetSelectedItem(SearchedItem si)
+    {
+        if (mudTable == null) return;
+
+        mudTable.SelectedItem = si;
+    }
+
+    public ListVm Vm => (ListVm)ViewModel;
+
+
+    public override void StateChangedCascade()
+    {
+        this.StateChanged();
+
+    }
+
+    protected override bool ShouldRender()
+    {
+        return true;
+    }
+
+    protected override void OnInitialized()
+    {
+        //SelectedResourceItem = SearchedItems?.FirstOrDefault()?.ResourceItem;
+        //App.MainScreenVm.ViewItem = SearchedItems?.FirstOrDefault()?.ResourceItem; too early, SearchedItems is not set yet
+
+        base.OnInitialized(); // do we need this?
+    }
+
+
+
+    private void SelectedValueChanged(ResourceItem ri) //(MudListItem selectedItem)
+    {
+        //object selectedValue = selectedItem.Value; //App.MainScreenVm.ViewItem;
+
+        LogInfo($"================================================ SelectedValueChanged() ================================================ ");
+
+
+        Vm.DetailsVm.Mode = Code.ViewModels.EditMode.View; // just in case
+
+        if (Vm.DetailsVm.DataModel != ri)
+        {
+            LogInfo($"SELECTED VCH - change!!! - ViewItem != mi ");
+            Vm.DetailsVm.DataModelSet(ri);  
+        }
+        else
+        {
+            LogInfo($"SELECTED VCH - no change - (ViewItem == ri) ");
+            return;
+        }
+
+    }
+
+    private async Task SearchClick(string debouncedText)
+    {
+        var s = App.Context.Folder.Searched.Criteria.Keywords == debouncedText ? "==" : "<>";
+        LogInfo($"**** SearchClick **** {s}(Ctx='{App.Context.Folder.Searched.Criteria.Keywords}',Db='{debouncedText}')");
+
+        //LogInfo($"**** SearchClick ****");
+        App.DoSearchClick();
+    }
+
+
+    private async Task SearchCancelClick()
+    {
+        //App.MainScreenVm.SearchString = string.Empty;
+        App.DoSearchCancelClick();
+    }
+
+    public void SortByClick(SortBy sortBy)
+    {
+        App.DoSortClick(sortBy);
+    }
+
+
+    private void TestClick(EventArgs e)
+    {
+        LogInfo($"**** TestClick - start ****");
+        LogInfo($"**** TestClick - end ****");
+    }
+
+
+
+    private int selectedRowNumber = -1;
+    private MudTable<SearchedItem> mudTable;
+
+
+    private void RowClickEvent(TableRowClickEventArgs<SearchedItem> args)
+    {
+        LogInfo("Row has been clicked");
+        SelectedValueChanged(args.Item?.ResourceItem);
+    }
+
+    private string SelectedRowClassFunc(SearchedItem element, int rowNumber)
+    {
+        LogInfo($"SelectedRowClassFunc(...,rowNumber={rowNumber}");
+
+        // if (selectedRowNumber == rowNumber)
+        // {
+        //     selectedRowNumber = -1;
+        //     LogInfo("Selected Row: None");
+        //     return string.Empty;
+        // }
+        if (mudTable.SelectedItem != null && mudTable.SelectedItem.Equals(element))
+        {
+            selectedRowNumber = rowNumber;
+            LogInfo($"Selected Row: {rowNumber}");
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+
+
+
+}

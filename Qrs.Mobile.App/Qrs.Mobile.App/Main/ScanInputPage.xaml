@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<q:QrsScrollPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:q="clr-namespace:Qrs.Mobile.App;assembly=Qrs.Mobile.App"
+             xmlns:controls="clr-namespace:Qrs.Mobile.App.Controls"  
+             x:Class="Qrs.Mobile.App.Main.ScanInputPage"
+               Title="Enter Qr Code">
+    <q:QrsScrollPage.Body>
+        <StackLayout>
+
+            <controls:TitleView Title="Enter Qr Code String"/>
+            <controls:TextInput x:Name="QrCodeString" LabelText="Qr Code String"  ></controls:TextInput>
+
+            <Button Text="Continue" Clicked="Continue_Clicked"></Button>
+            <Label Style="{StaticResource ButtonInfo}" >
+                When debugging and camera does not work, you could copy-paste Qr Code String instead of scanning the real code
+            </Label>
+
+        </StackLayout>
+    </q:QrsScrollPage.Body>
+</q:QrsScrollPage>
