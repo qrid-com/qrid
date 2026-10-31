@@ -71,8 +71,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qrs.UI.Avalonia", "Qrs.UI.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qrs.App.SudoAskPass.Cli", "Qrs.App.SudoAskPass.Cli\Qrs.App.SudoAskPass.Cli.csproj", "{2C64B4C9-6462-43E0-AB27-3A66EF79BEDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qrs.App.EmailTools.Avalonia", "Qrs.App.EmailTools.Avalonia\Qrs.App.EmailTools.Avalonia.csproj", "{13B295A0-6A61-47FB-B217-CB9E99D880BB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qrs.App.SshAskPass.Cli", "Qrs.App.SshAskPass.Cli\Qrs.App.SshAskPass.Cli.csproj", "{A1B2C3D4-55E6-47F8-9A0B-1C2D3E4F5A6B}"
 EndProject
 Global
@@ -2299,66 +2297,6 @@ Global
 		{2C64B4C9-6462-43E0-AB27-3A66EF79BEDE}.Release|x64.Build.0 = Release|Any CPU
 		{2C64B4C9-6462-43E0-AB27-3A66EF79BEDE}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C64B4C9-6462-43E0-AB27-3A66EF79BEDE}.Release|x86.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|ARM.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|ARM.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|iPhone.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|iPhone.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|iPhoneSimulator.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|x64.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|x64.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|x86.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.AzureWebSites|x86.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|ARM.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|ARM.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|iPhone.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|iPhone.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|x64.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|x64.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|x86.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.CodeAnalysis|x86.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|ARM.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|x64.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Debug|x86.Build.0 = Debug|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|Any CPU.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|Any CPU.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|ARM.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|ARM.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|iPhone.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|iPhone.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|iPhoneSimulator.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|x64.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|x64.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|x86.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Development|x86.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|ARM.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|ARM.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|iPhone.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|x64.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|x64.Build.0 = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|x86.ActiveCfg = Release|Any CPU
-		{13B295A0-6A61-47FB-B217-CB9E99D880BB}.Release|x86.Build.0 = Release|Any CPU
 		{A1B2C3D4-55E6-47F8-9A0B-1C2D3E4F5A6B}.AzureWebSites|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1B2C3D4-55E6-47F8-9A0B-1C2D3E4F5A6B}.AzureWebSites|Any CPU.Build.0 = Debug|Any CPU
 		{A1B2C3D4-55E6-47F8-9A0B-1C2D3E4F5A6B}.AzureWebSites|ARM.ActiveCfg = Debug|Any CPU
@@ -2424,7 +2362,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		LessCompiler = 27e20bbd-ec49-47e3-b20f-27d7f1a5ee61
 		SolutionGuid = {3BFC414E-F246-4545-AF07-E09FBFA2F425}
+		LessCompiler = 27e20bbd-ec49-47e3-b20f-27d7f1a5ee61
 	EndGlobalSection
 EndGlobal
