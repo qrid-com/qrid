@@ -15,23 +15,12 @@ This is the developer documentation for the **QRS** platform in the
 
 ---
 
-## TL;DR
+## How it works
 
-```mermaid
-flowchart LR
-    subgraph Desktop["Client Application (CA)"]
-        D1["Data encrypted with DEK<br/>+ DEK wrapped with KEK"]
-    end
-    subgraph Phone["QRS Mobile App (MA)"]
-        K["Master Key (KEK)<br/>AES-256, never leaves phone"]
-    end
-    T[("QRS Tunnel Server<br/>zero-knowledge relay")]
+![How it works](qrs-doc\img\Diagram-Fig-1.svg)
 
-    Desktop -- "1. shows QR code<br/>(tunnel URL + session key)" --> Phone
-    Desktop <-- "2. encrypted request / response<br/>(PQC hybrid + AES-GCM + TLS)" --> T
-    T <--> Phone
-    Phone -- "3. user confirms on phone,<br/>KEK wraps / unwraps DEK" --> K
-```
+
+
 
 1. Your application shows a QR code.
 2. The user scans it with the **QRS Mobile App** and confirms the operation on the phone.
