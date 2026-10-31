@@ -17,7 +17,7 @@ This is the developer documentation for the **QRS** platform in the
 
 ## How it works
 
-![How it works](qrs-doc\img\Diagram-Fig-1.svg)
+![How it works](qrs-doc/img/Diagram-Fig-1.svg)
 
 
 
