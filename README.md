@@ -3,8 +3,7 @@
 > **Scan a QR code instead of typing a password.**
 > QRS lets any Desktop, Web, CLI or Mobile application encrypt user data on the client side with
 > random AES‑256 keys that are wrapped by a Master Key that never leaves the user's phone —
-> transported over a zero‑knowledge tunnel protected by hybrid **ML‑KEM‑768 + ECDH P‑256**
-> post‑quantum cryptography.
+> transported over a zero‑knowledge tunnel protected by post‑quantum cryptography.
 
 This is the developer documentation for the **QRS** platform in the
 `qrid-com/QRID` repository.
