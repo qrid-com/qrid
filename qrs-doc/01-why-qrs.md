@@ -157,7 +157,7 @@ QRS may not be the right fit when:
 ## QRS vs QRID
 
 The repository hosts two related platforms. QRS is the **S**imple, **S**ecure, **S**tandalone,
-**S**elf‑sufficient one. QRID is the more ambitious platform for building federted E2EE applications using Post Quantum Cryptography. QRID is not yet ready to be open sourced.
+**S**elf‑sufficient one. QRID is the more ambitious platform for building federated E2EE applications using Post Quantum Cryptography. QRID is not yet ready to be open sourced.
 
 | | **QRS** | QRID |
 |---|---|---|
