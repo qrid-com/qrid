@@ -6,7 +6,7 @@
 > transported over a zero‑knowledge tunnel protected by post‑quantum cryptography.
 
 This is the developer documentation for the **QRS** platform in the
-`qrid-com/QRID` repository.
+`qrid-com/qrid` repository.
 
 > **Status:** QRS is in **public beta**. The protocols described here are versioned
 > (`QRS Client Protocol 1.0.0`, `QRS Server Protocol 1.0.0`) and implemented by the code in the
